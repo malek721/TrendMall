@@ -1,7 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
-public class GirisYap {
+public class GirisYap{
     JPanel girisForm;
     ImageIcon logo;
     JLabel imageContainer;
@@ -42,18 +44,53 @@ public class GirisYap {
         uyeOlSwitch.setFont(new Font("Poppins", Font.PLAIN, 17));
         uyeOlSwitch.setFocusable(false);
         uyeOlSwitch.setBorder(null);
-        eposta = new JTextField("  E-posta");
+        eposta = new JTextField("   E-posta");
         eposta.setBounds(50, 131, 400, 40);
         eposta.setBackground(new Color(0xE7E7E7));
         eposta.setForeground(new Color(0xBFBFBF));
-        eposta.setBorder(null);
         eposta.setFont(new Font("Poppins", Font.PLAIN, 18));
+        eposta.setBorder(null);
+        eposta.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (eposta.getText().equals("   E-posta")) {
+                    eposta.setText("  ");
+                    eposta.setForeground(new Color(30,30,30)); // Set text color on focus
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (eposta.getText().equals("  ")) {
+                    eposta.setText("   E-posta");
+                    eposta.setForeground(new Color(0xBFBFBF)); // Set placeholder color on focus lost
+                }
+            }
+        });
+
         sifre = new JTextField("   Şifre");
         sifre.setBounds(50, 220, 400, 40);
         sifre.setBackground(new Color(0xE7E7E7));
         sifre.setFont(new Font("Poppins", Font.PLAIN, 18));
         sifre.setForeground(new Color(0xBFBFBF));
         sifre.setBorder(null);
+        sifre.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (sifre.getText().equals("   Şifre")) {
+                    sifre.setText("  ");
+                    sifre.setForeground(new Color(30,30,30)); // Set text color on focus
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (sifre.getText().equals("  ")) {
+                    sifre.setText("   Şifre");
+                    sifre.setForeground(new Color(0xBFBFBF)); // Set placeholder color on focus lost
+                }
+            }
+        });
         girisYapButton = new JButton("Giriş Yap");
         girisYapButton.setFont(new Font("Poppins", Font.BOLD, 24));
         girisYapButton.setBounds(50, 316, 400, 50);
@@ -87,6 +124,9 @@ public class GirisYap {
         girisFrame.add(bottomPanel, BorderLayout.SOUTH);
         girisFrame.add(girisForm, BorderLayout.CENTER);
 
-
     }
+
+
+
+
 }
