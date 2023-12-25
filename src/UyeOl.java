@@ -74,7 +74,6 @@ public class UyeOl implements ActionListener {
         uyeOlForm.setAutoscrolls(true);
         for (int i = 0; i < inputsName.length; i++) {
             JTextField input = new JTextField("   " + inputsName[i]);
-            input.setFocusable(false);
             input.setSize(400, 40);
             input.setBackground(new Color(0xE7E7E7));
             input.setForeground(new Color(0xBFBFBF));

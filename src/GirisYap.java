@@ -69,7 +69,6 @@ public class GirisYap implements ActionListener {
         girisForm.setLayout(null);
         for (int i = 0; i < inputsName.length; i++) {
             JTextField input = new JTextField("   " + inputsName[i]);
-            input.setFocusable(false);
             input.setBounds(50, 131 + (i * 89), 400, 40);
             input.setBackground(new Color(0xE7E7E7));
             input.setForeground(new Color(0xBFBFBF));
