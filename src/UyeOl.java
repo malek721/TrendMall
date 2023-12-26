@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.Statement;
 import java.util.HashMap;
 
 public class UyeOl implements ActionListener {
@@ -60,6 +61,7 @@ public class UyeOl implements ActionListener {
         uyeOlButton.setForeground(Color.WHITE);
         uyeOlButton.setFocusable(false);
         uyeOlButton.setBorder(null);
+        uyeOlButton.addActionListener(this);
         imageContainer = new JLabel(logo);
         imageContainer.setVerticalAlignment(JLabel.TOP);
         imageContainer.setHorizontalAlignment(JLabel.CENTER);
@@ -121,6 +123,26 @@ public class UyeOl implements ActionListener {
         if(e.getSource() == girisYapSwitch){
             uyeOlFrame.dispose();
             new GirisYap();
+        }
+
+        if(e.getSource() == uyeOlButton){
+            Statement statement;
+            DBConnection conn = DBConnection.getInstance();
+            try{
+                String query = "INSERT INTO Musteri VALUES (Default,'" +inputs.get("Ad").getText().trim()+
+                        "','"+inputs.get("Soyad").getText().trim()+"','"+inputs.get("E-posta").getText().trim()+
+                        "','"+inputs.get("Sifre").getText().trim()+ "','"+inputs.get("Adres").getText().trim()+
+                        "','"+inputs.get("Telefon Numarası").getText().trim()+"')";
+                statement = conn.getConnection().createStatement();
+                statement.executeUpdate(query);
+                System.out.println("jejrnej");
+
+            }catch (Exception s){
+                System.out.println(inputs.get("Telefon Numarası").getText().trim().length());
+                System.out.println(s);
+
+            }
+
         }
     }
 }
