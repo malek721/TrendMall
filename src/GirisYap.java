@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.HashMap;
 
 public class GirisYap implements ActionListener {
@@ -112,9 +114,28 @@ public class GirisYap implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == uyeOlSwitch ){
+        if (e.getSource() == uyeOlSwitch) {
             girisFrame.dispose();
             new UyeOl();
+        }
+
+        if (e.getSource() == girisYapButton) {
+            DBConnection conn = DBConnection.getInstance();
+            Statement statement;
+            ResultSet sonuc;
+            try {
+                String query = "SELECT * FROM Musteri WHERE eposta = '"
+                        + inputs.get("E-posta").getText().trim() + "' and sifre = '" + inputs.get("sifre").getText().trim() + "'";
+                statement = conn.getConnection().createStatement();
+                sonuc = statement.executeQuery(query);
+                if (sonuc == null) {
+                    System.out.println("There is no user with this email or pass word");
+                } else {
+                    System.out.println("Log in successful");
+                }
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
         }
     }
 }
