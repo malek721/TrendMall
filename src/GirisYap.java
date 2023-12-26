@@ -1,33 +1,19 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.event.*;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.HashMap;
 
 public class GirisYap implements ActionListener {
-    JPanel girisForm;
-    ImageIcon logo;
-    JLabel imageContainer;
     HashMap<String, JTextField> inputs = new HashMap<>();
-    HashMap<String, JButton> buttons = new HashMap<>();
     String[] inputsName = {"E-posta", "Şifre"};
+    HashMap<String, JButton> buttons = new HashMap<>();
     String[] buttonSwitchName = {"Giriş Yap", "Üye Ol"};
     JButton girisYapButton;
-
     TrendMallFrame girisFrame;
 
     public GirisYap() {
-        logo = new ImageIcon("img.png");
-        imageContainer = new JLabel(logo);
-        imageContainer.setVerticalAlignment(JLabel.TOP);
-        imageContainer.setHorizontalAlignment(JLabel.CENTER);
-        imageContainer.setVerticalTextPosition(JLabel.TOP);
-        imageContainer.setHorizontalTextPosition(JLabel.CENTER);
-        imageContainer.setIconTextGap(15);
         JPanel topPanel = new JPanel();
         topPanel.setBackground(new Color(251, 251, 251));
         JPanel leftSidePanel = new JPanel();
@@ -39,12 +25,19 @@ public class GirisYap implements ActionListener {
         JPanel bottomPanel = new JPanel();
         bottomPanel.setPreferredSize(new Dimension(0, 200));
         bottomPanel.setBackground(new Color(251, 251, 251));
+        ImageIcon logo = new ImageIcon("img.png");
+        JLabel imageContainer = new JLabel(logo);
+        imageContainer.setVerticalAlignment(JLabel.TOP);
+        imageContainer.setHorizontalAlignment(JLabel.CENTER);
+        imageContainer.setVerticalTextPosition(JLabel.TOP);
+        imageContainer.setHorizontalTextPosition(JLabel.CENTER);
+        imageContainer.setIconTextGap(15);
         JPanel buttonContainer = new JPanel();
         buttonContainer.setBounds(114, 29, 270, 45);
         buttonContainer.setBackground(new Color(0XE7E7E7));
         buttonContainer.setBorder(BorderFactory.createLineBorder(new Color(0xCAC5C5), 1));
         buttonContainer.setLayout(null);
-        girisForm = new JPanel();
+        JPanel girisForm = new JPanel();
         girisForm.setPreferredSize(new Dimension(500, 420));
         girisForm.setBackground(new Color(0xF7F7F7));
         girisForm.setBorder(BorderFactory.createLineBorder(new Color(0xB0B0B0), 1, true));
@@ -72,6 +65,7 @@ public class GirisYap implements ActionListener {
             input.setForeground(new Color(0xBFBFBF));
             input.setFont(new Font("Poppins", Font.PLAIN, 18));
             input.setBorder(null);
+
             int tmp = i;
             input.addFocusListener(new FocusListener() {
                 @Override
@@ -125,7 +119,8 @@ public class GirisYap implements ActionListener {
             ResultSet sonuc;
             try {
                 String query = "SELECT * FROM Musteri WHERE eposta = '"
-                        + inputs.get("E-posta").getText().trim() + "' and sifre = '" + inputs.get("Şifre").getText().trim() + "'";
+                        + inputs.get("E-posta").getText().trim() + "' and sifre = '"
+                        + inputs.get("Şifre").getText().trim() + "'";
                 statement = conn.getConnection().createStatement();
                 sonuc = statement.executeQuery(query);
                 if (sonuc == null) {
