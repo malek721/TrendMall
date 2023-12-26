@@ -16,7 +16,7 @@ public class UyeOl implements ActionListener {
     JButton girisYapSwitch;
 
     HashMap<String, JTextField> inputs = new HashMap<>();
-    String[] inputsName = {"E-posta", "Ad", "Soyad", "Sifre", "Telefon Numarası", "Adres"};
+    String[] inputsName = {"E-posta", "Ad", "Soyad", "Şifre", "Telefon Numarası", "Adres"};
 
     JButton uyeOlButton;
 
@@ -131,16 +131,14 @@ public class UyeOl implements ActionListener {
             try{
                 String query = "INSERT INTO Musteri VALUES (Default,'" +inputs.get("Ad").getText().trim()+
                         "','"+inputs.get("Soyad").getText().trim()+"','"+inputs.get("E-posta").getText().trim()+
-                        "','"+inputs.get("Sifre").getText().trim()+ "','"+inputs.get("Adres").getText().trim()+
+                        "','"+inputs.get("Şifre").getText().trim()+ "','"+inputs.get("Adres").getText().trim()+
                         "','"+inputs.get("Telefon Numarası").getText().trim()+"')";
                 statement = conn.getConnection().createStatement();
                 statement.executeUpdate(query);
                 System.out.println("jejrnej");
 
-            }catch (Exception s){
-                System.out.println(inputs.get("Telefon Numarası").getText().trim().length());
-                System.out.println(s);
-
+            }catch (Exception ex){
+                System.out.println("Operation Failed");
             }
 
         }

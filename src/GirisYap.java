@@ -12,16 +12,22 @@ public class GirisYap implements ActionListener {
     JPanel girisForm;
     ImageIcon logo;
     JLabel imageContainer;
-    JButton uyeOlSwitch;
     HashMap<String, JTextField> inputs = new HashMap<>();
-    String[] inputsName = {"E-posta", "Sifre"};
+    HashMap<String, JButton> buttons = new HashMap<>();
+    String[] inputsName = {"E-posta", "Şifre"};
+    String[] buttonSwitchName = {"Giriş Yap", "Üye Ol"};
     JButton girisYapButton;
 
     TrendMallFrame girisFrame;
 
     public GirisYap() {
-
         logo = new ImageIcon("img.png");
+        imageContainer = new JLabel(logo);
+        imageContainer.setVerticalAlignment(JLabel.TOP);
+        imageContainer.setHorizontalAlignment(JLabel.CENTER);
+        imageContainer.setVerticalTextPosition(JLabel.TOP);
+        imageContainer.setHorizontalTextPosition(JLabel.CENTER);
+        imageContainer.setIconTextGap(15);
         JPanel topPanel = new JPanel();
         topPanel.setBackground(new Color(251, 251, 251));
         JPanel leftSidePanel = new JPanel();
@@ -37,38 +43,28 @@ public class GirisYap implements ActionListener {
         buttonContainer.setBounds(114, 29, 270, 45);
         buttonContainer.setBackground(new Color(0XE7E7E7));
         buttonContainer.setBorder(BorderFactory.createLineBorder(new Color(0xCAC5C5), 1));
-        JButton girisYapSwitch = new JButton("Giriş Yap");
-        girisYapSwitch.setFont(new Font("Poppins", Font.BOLD, 17));
-        girisYapSwitch.setBounds(3, 3, 140, 40);
-        girisYapSwitch.setBackground(new Color(0xD27550));
-        girisYapSwitch.setForeground(Color.WHITE);
-        girisYapSwitch.setFocusable(false);
-        girisYapSwitch.setBorder(null);
-        uyeOlSwitch = new JButton("Üye Ol");
-        uyeOlSwitch.setBounds(148, 3, 119, 40);
-        uyeOlSwitch.setBackground(new Color(0xE7E7E7));
-        uyeOlSwitch.setFont(new Font("Poppins", Font.BOLD, 17));
-        uyeOlSwitch.setFocusable(false);
-        uyeOlSwitch.setBorder(null);
-        uyeOlSwitch.addActionListener(this);
-        girisYapButton = new JButton("Giriş Yap");
-        girisYapButton.setFont(new Font("Poppins", Font.BOLD, 24));
-        girisYapButton.setBounds(50, 316, 400, 50);
-        girisYapButton.setBackground(new Color(0xD27550));
-        girisYapButton.setForeground(Color.WHITE);
-        girisYapButton.setFocusable(false);
-        girisYapButton.setBorder(null);
-        imageContainer = new JLabel(logo);
-        imageContainer.setVerticalAlignment(JLabel.TOP);
-        imageContainer.setHorizontalAlignment(JLabel.CENTER);
-        imageContainer.setVerticalTextPosition(JLabel.TOP);
-        imageContainer.setHorizontalTextPosition(JLabel.CENTER);
-        imageContainer.setIconTextGap(15);
+        buttonContainer.setLayout(null);
         girisForm = new JPanel();
         girisForm.setPreferredSize(new Dimension(500, 420));
         girisForm.setBackground(new Color(0xF7F7F7));
         girisForm.setBorder(BorderFactory.createLineBorder(new Color(0xB0B0B0), 1, true));
         girisForm.setLayout(null);
+        for (int i = 0; i < buttonSwitchName.length; i++) {
+            JButton button = new JButton(buttonSwitchName[i]);
+            button.setFont(new Font("Poppins", Font.BOLD, 17));
+            button.setBounds(3 + (145 * i), 3, 140 - (21 * i), 40);
+            button.setFocusable(false);
+            button.setBorder(null);
+            if (buttonSwitchName[i].equals("Giriş Yap")) {
+                button.setBackground(new Color(0xD27550));
+                button.setForeground(Color.WHITE);
+            } else {
+                button.setBackground(new Color(0xE7E7E7));
+                button.addActionListener(this);
+            }
+            buttons.put(buttonSwitchName[i], button);
+            buttonContainer.add(button);
+        }
         for (int i = 0; i < inputsName.length; i++) {
             JTextField input = new JTextField("   " + inputsName[i]);
             input.setBounds(50, 131 + (i * 89), 400, 40);
@@ -97,13 +93,17 @@ public class GirisYap implements ActionListener {
             inputs.put(inputsName[i], input);
             girisForm.add(input);
         }
-        buttonContainer.setLayout(null);
-        buttonContainer.add(girisYapSwitch);
-        buttonContainer.add(uyeOlSwitch);
-        girisFrame = new TrendMallFrame();
+        girisYapButton = new JButton("Giriş Yap");
+        girisYapButton.setFont(new Font("Poppins", Font.BOLD, 24));
+        girisYapButton.setBounds(50, 316, 400, 50);
+        girisYapButton.setBackground(new Color(0xD27550));
+        girisYapButton.setForeground(Color.WHITE);
+        girisYapButton.setFocusable(false);
+        girisYapButton.setBorder(null);
         topPanel.add(imageContainer);
         girisForm.add(buttonContainer, BorderLayout.NORTH);
         girisForm.add(girisYapButton);
+        girisFrame = new TrendMallFrame();
         girisFrame.add(topPanel, BorderLayout.NORTH);
         girisFrame.add(leftSidePanel, BorderLayout.WEST);
         girisFrame.add(rightSidePanel, BorderLayout.EAST);
@@ -114,7 +114,7 @@ public class GirisYap implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == uyeOlSwitch) {
+        if (e.getSource() == buttons.get("Üye Ol")) {
             girisFrame.dispose();
             new UyeOl();
         }
@@ -125,7 +125,7 @@ public class GirisYap implements ActionListener {
             ResultSet sonuc;
             try {
                 String query = "SELECT * FROM Musteri WHERE eposta = '"
-                        + inputs.get("E-posta").getText().trim() + "' and sifre = '" + inputs.get("sifre").getText().trim() + "'";
+                        + inputs.get("E-posta").getText().trim() + "' and sifre = '" + inputs.get("Şifre").getText().trim() + "'";
                 statement = conn.getConnection().createStatement();
                 sonuc = statement.executeQuery(query);
                 if (sonuc == null) {
@@ -134,7 +134,7 @@ public class GirisYap implements ActionListener {
                     System.out.println("Log in successful");
                 }
             } catch (Exception ex) {
-                System.out.println(ex);
+                System.out.println("Operation Failed");
             }
         }
     }
