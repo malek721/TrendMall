@@ -1,30 +1,25 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.event.*;
 import java.sql.Statement;
 import java.util.HashMap;
 
 public class UyeOl implements ActionListener {
     TrendMallFrame uyeOlFrame;
-    JPanel uyeOlForm;
-    ImageIcon logo;
-    JLabel imageContainer;
-    JButton uyeOlSwitch;
-    JButton girisYapSwitch;
+    HashMap<String, JButton> buttons = new HashMap<>();
+    String[] buttonSwitchName = {"Giriş Yap", "Üye Ol"};
 
     HashMap<String, JTextField> inputs = new HashMap<>();
     String[] inputsName = {"E-posta", "Ad", "Soyad", "Şifre", "Telefon Numarası", "Adres"};
 
+    HashMap<String, JRadioButton> kullaniciTuru = new HashMap<>();
+    ButtonGroup kullanicilar;
+    String[] kullanicilarNames = {"Müşteri", "Satıcı"};
+
     JButton uyeOlButton;
+    String sifre = "";
 
     public UyeOl() {
-        JPanel inputPanel = new JPanel();
-        inputPanel.setBounds(50, 131, 400,250);
-        inputPanel.setLayout(new GridLayout(inputsName.length, 1, 89, 0));
-        logo = new ImageIcon("img.png");
         JPanel topPanel = new JPanel();
         topPanel.setBackground(new Color(251, 251, 251));
         JPanel leftSidePanel = new JPanel();
@@ -36,44 +31,43 @@ public class UyeOl implements ActionListener {
         JPanel bottomPanel = new JPanel();
         bottomPanel.setPreferredSize(new Dimension(0, 100));
         bottomPanel.setBackground(new Color(251, 251, 251));
-        JPanel buttonContainer = new JPanel();
-        buttonContainer.setBounds(114, 29, 270, 45);
-        buttonContainer.setBackground(new Color(0XE7E7E7));
-        buttonContainer.setBorder(BorderFactory.createLineBorder(new Color(0xCAC5C5), 1));
-        girisYapSwitch = new JButton("Giriş Yap");
-        girisYapSwitch.setFont(new Font("Poppins", Font.BOLD, 17));
-        girisYapSwitch.setBounds(3, 3, 140, 40);
-        girisYapSwitch.setBackground(new Color(0xE7E7E7));
-        girisYapSwitch.setFocusable(false);
-        girisYapSwitch.setBorder(null);
-        girisYapSwitch.addActionListener(this);
-        uyeOlSwitch = new JButton("Üye Ol");
-        uyeOlSwitch.setBounds(148, 3, 119, 40);
-        uyeOlSwitch.setBackground(new Color(0xD27550));
-        uyeOlSwitch.setForeground(Color.WHITE);
-        uyeOlSwitch.setFont(new Font("Poppins", Font.BOLD, 17));
-        uyeOlSwitch.setFocusable(false);
-        uyeOlSwitch.setBorder(null);
-        uyeOlButton = new JButton("Üye Ol");
-        uyeOlButton.setFont(new Font("Poppins", Font.BOLD, 24));
-        uyeOlButton.setBounds(50, 400, 400, 50);
-        uyeOlButton.setBackground(new Color(0xD27550));
-        uyeOlButton.setForeground(Color.WHITE);
-        uyeOlButton.setFocusable(false);
-        uyeOlButton.setBorder(null);
-        uyeOlButton.addActionListener(this);
-        imageContainer = new JLabel(logo);
+        ImageIcon logo = new ImageIcon("img.png");
+        JLabel imageContainer = new JLabel(logo);
+        imageContainer.setIconTextGap(15);
         imageContainer.setVerticalAlignment(JLabel.TOP);
         imageContainer.setHorizontalAlignment(JLabel.CENTER);
         imageContainer.setVerticalTextPosition(JLabel.TOP);
         imageContainer.setHorizontalTextPosition(JLabel.CENTER);
-        imageContainer.setIconTextGap(15);
-        uyeOlForm = new JPanel();
+        JPanel buttonContainer = new JPanel();
+        buttonContainer.setBounds(114, 29, 270, 45);
+        buttonContainer.setBackground(new Color(0XE7E7E7));
+        buttonContainer.setBorder(BorderFactory.createLineBorder(new Color(0xCAC5C5), 1));
+        buttonContainer.setLayout(null);
+        for (int i = 0; i < buttonSwitchName.length; i++) {
+            JButton button = new JButton(buttonSwitchName[i]);
+            button.setFont(new Font("Poppins", Font.BOLD, 17));
+            button.setBounds(3 + (145 * i), 3, 140 - (21 * i), 40);
+            button.setFocusable(false);
+            button.setBorder(null);
+            if (buttonSwitchName[i].equals("Üye Ol")) {
+                button.setBackground(new Color(0xD27550));
+                button.setForeground(Color.WHITE);
+            } else {
+                button.setBackground(new Color(0xE7E7E7));
+                button.addActionListener(this);
+            }
+            buttons.put(buttonSwitchName[i], button);
+            buttonContainer.add(button);
+        }
+        JPanel uyeOlForm = new JPanel();
         uyeOlForm.setPreferredSize(new Dimension(500, 420));
         uyeOlForm.setBackground(new Color(0xF7F7F7));
         uyeOlForm.setBorder(BorderFactory.createLineBorder(new Color(0xB0B0B0), 1, true));
         uyeOlForm.setLayout(null);
         uyeOlForm.setAutoscrolls(true);
+        JPanel inputList = new JPanel();
+        inputList.setBounds(50, 131, 400, 250);
+        inputList.setLayout(new GridLayout(inputsName.length, 1, 89, 0));
         for (int i = 0; i < inputsName.length; i++) {
             JTextField input = new JTextField("   " + inputsName[i]);
             input.setSize(400, 40);
@@ -100,12 +94,28 @@ public class UyeOl implements ActionListener {
                 }
             });
             inputs.put(inputsName[i], input);
-            inputPanel.add(input);
+            inputList.add(input);
         }
-        uyeOlForm.add(inputPanel);
-        buttonContainer.setLayout(null);
-        buttonContainer.add(girisYapSwitch);
-        buttonContainer.add(uyeOlSwitch);
+        kullanicilar = new ButtonGroup();
+        for (int i = 0; i < kullanicilarNames.length; i++) {
+            JRadioButton kullanici = new JRadioButton(kullanicilarNames[i]);
+            kullaniciTuru.put(kullanicilarNames[i], kullanici);
+            kullanici.setBounds(50 + (i * 110), 390, 100, 30);
+            kullanici.setFocusable(false);
+            kullanici.setBackground(new Color(0xF7F7F7));
+            kullanici.addActionListener(this);
+            kullanicilar.add(kullanici);
+            uyeOlForm.add(kullanici);
+        }
+        uyeOlForm.add(inputList);
+        uyeOlButton = new JButton("Üye Ol");
+        uyeOlButton.setFont(new Font("Poppins", Font.BOLD, 24));
+        uyeOlButton.setBounds(50, 420, 400, 50);
+        uyeOlButton.setBackground(new Color(0xD27550));
+        uyeOlButton.setForeground(Color.WHITE);
+        uyeOlButton.setFocusable(false);
+        uyeOlButton.setBorder(null);
+        uyeOlButton.addActionListener(this);
         uyeOlFrame = new TrendMallFrame();
         topPanel.add(imageContainer);
         uyeOlForm.add(buttonContainer, BorderLayout.NORTH);
@@ -120,24 +130,32 @@ public class UyeOl implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == girisYapSwitch){
+        if (e.getSource() == buttons.get("Giriş Yap")) {
             uyeOlFrame.dispose();
             new GirisYap();
         }
 
-        if(e.getSource() == uyeOlButton){
+        if (e.getSource() == uyeOlButton) {
             Statement statement;
             DBConnection conn = DBConnection.getInstance();
-            try{
-                String query = "INSERT INTO Musteri VALUES (Default,'" +inputs.get("Ad").getText().trim()+
-                        "','"+inputs.get("Soyad").getText().trim()+"','"+inputs.get("E-posta").getText().trim()+
-                        "','"+inputs.get("Şifre").getText().trim()+ "','"+inputs.get("Adres").getText().trim()+
-                        "','"+inputs.get("Telefon Numarası").getText().trim()+"')";
+            String query;
+            try {
+                if (kullanicilar.getSelection().equals(kullaniciTuru.get("Müşteri"))) {
+                    query = "INSERT INTO Musteri VALUES (Default,'" + inputs.get("Ad").getText().trim() +
+                            "','" + inputs.get("Soyad").getText().trim() + "','" + inputs.get("E-posta").getText().trim() +
+                            "','" + inputs.get("Şifre").getText().trim() + "','" + inputs.get("Adres").getText().trim() +
+                            "','" + inputs.get("Telefon Numarası").getText().trim() + "')";
+                } else {
+                    query = "INSERT INTO Satici VALUES (Default,'" + inputs.get("Ad").getText().trim() +
+                            "','" + inputs.get("Soyad").getText().trim() + "','" + inputs.get("E-posta").getText().trim() +
+                            "','" + sifre + "','" + inputs.get("Adres").getText().trim() +
+                            "','" + inputs.get("Telefon Numarası").getText().trim() + "')";
+                }
                 statement = conn.getConnection().createStatement();
                 statement.executeUpdate(query);
                 System.out.println("jejrnej");
 
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 System.out.println("Operation Failed");
             }
 
