@@ -1,19 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.HashMap;
 
-public class GirisYap implements ActionListener {
+public class GirisSayfa implements ActionListener {
     HashMap<String, JTextField> inputs = new HashMap<>();
     String[] inputsName = {"E-posta", "Şifre"};
     HashMap<String, JButton> buttons = new HashMap<>();
     String[] buttonSwitchName = {"Giriş Yap", "Üye Ol"};
     JButton girisYapButton;
     TrendMallFrame girisFrame;
+    JLabel message;
 
-    public GirisYap() {
+    public GirisSayfa() {
         JPanel topPanel = new JPanel();
         topPanel.setBackground(new Color(251, 251, 251));
         JPanel leftSidePanel = new JPanel();
@@ -94,9 +93,14 @@ public class GirisYap implements ActionListener {
         girisYapButton.setForeground(Color.WHITE);
         girisYapButton.setFocusable(false);
         girisYapButton.setBorder(null);
+        girisYapButton.addActionListener(this);
+        message = new JLabel("");
+        message.setBounds(130, 280, 350,20);
+        message.setFont(new Font("Poppins", Font.BOLD, 12));
         topPanel.add(imageContainer);
         girisForm.add(buttonContainer, BorderLayout.NORTH);
         girisForm.add(girisYapButton);
+        girisForm.add(message);
         girisFrame = new TrendMallFrame();
         girisFrame.add(topPanel, BorderLayout.NORTH);
         girisFrame.add(leftSidePanel, BorderLayout.WEST);
@@ -110,26 +114,17 @@ public class GirisYap implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttons.get("Üye Ol")) {
             girisFrame.dispose();
-            new UyeOl();
+            new UyeOlSayfa();
         }
 
         if (e.getSource() == girisYapButton) {
-            DBConnection conn = DBConnection.getInstance();
-            Statement statement;
-            ResultSet sonuc;
-            try {
-                String query = "SELECT * FROM Musteri WHERE eposta = '"
-                        + inputs.get("E-posta").getText().trim() + "' and sifre = '"
-                        + inputs.get("Şifre").getText().trim() + "'";
-                statement = conn.getConnection().createStatement();
-                sonuc = statement.executeQuery(query);
-                if (sonuc == null) {
-                    System.out.println("There is no user with this email or pass word");
-                } else {
-                    System.out.println("Log in successful");
-                }
-            } catch (Exception ex) {
-                System.out.println("Operation Failed");
+            if(!GirisYapma.loggingIn(inputs.get("E-posta").getText().trim(), inputs.get("Şifre").getText().trim())){
+                message.setText("There is no user with this email or password");
+                message.setForeground(Color.RED);
+            }
+            else{
+                message.setText("Log in successful");
+                message.setForeground(Color.GREEN);
             }
         }
     }

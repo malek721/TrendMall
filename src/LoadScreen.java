@@ -8,11 +8,10 @@ public class LoadScreen {
         JLabel imageContainer = new JLabel(logo);
         main.add(imageContainer, BorderLayout.CENTER);
         Timer timer = new Timer(3000, e -> {
-            new GirisYap();
+            new GirisSayfa();
             main.dispose();
         });
 
-        // Start the timer
         timer.setRepeats(false);
         timer.start();
     }

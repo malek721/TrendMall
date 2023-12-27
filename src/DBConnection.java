@@ -2,9 +2,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DBConnection {
-    private final static String database = "TrendMallDatabase";
+    private final static String database = "TrendMallDB";
     private final static String username = "postgres";
-    private final static String password = "malek2002";
+    private final static String password = "AmrF.C.B";
     private static Connection conn = null;
     private static final DBConnection dbconn = new DBConnection();
 
