@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ProfileDuzenleme implements ActionListener {
-        JPanel panUp,paDown,panInput;
+        JPanel panUp,panDown,panInput;
         JButton cikisBtn,donBtn,kayidetBtn;
         ImageIcon logo;
         JLabel imageContainer,adLb,soyadLb,tel_noLb,adresLb,sifreLb;
