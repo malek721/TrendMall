@@ -1,3 +1,5 @@
+package View;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,7 +10,7 @@ public class ProfileDuzenleme implements ActionListener {
         JButton cikisBtn,donBtn,kayidetBtn;
         ImageIcon logo;
         JLabel imageContainer,adLb,soyadLb,tel_noLb,adresLb,sifreLb;
-        TrendMallFrame profileDuzenlemeFrame;
+        MainFrame profileDuzenlemeFrame;
 
         public ProfileDuzenleme(){
             panUp = new JPanel();

@@ -1,9 +1,11 @@
+package View;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class TrendMallFrame extends JFrame {
+public class MainFrame extends JFrame {
 
-    public TrendMallFrame(){
+    public MainFrame(){
         this.setTitle("TrendMall");
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setVisible(true);

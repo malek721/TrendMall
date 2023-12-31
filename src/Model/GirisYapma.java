@@ -1,8 +1,18 @@
+package Model;
+
+import Connection.DBConnection;
+
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class GirisYapma {
-    static public boolean loggingIn(String eposta, String sifre) {
+    private String eposta;
+
+    public GirisYapma() {
+        this.eposta = "";
+    }
+
+    public boolean loggingIn(String eposta, String sifre) {
         DBConnection conn = DBConnection.getInstance();
         Statement statement;
         ResultSet sonuc;
@@ -14,6 +24,7 @@ public class GirisYapma {
             statement = conn.getConnection().createStatement();
             sonuc = statement.executeQuery(query);
             if (sonuc.next()) {
+                this.eposta = eposta;
                 return true;
             }
             query = "SELECT * FROM Satici WHERE eposta = '"
@@ -21,10 +32,18 @@ public class GirisYapma {
                     + sifre + "'";
             statement = conn.getConnection().createStatement();
             sonuc = statement.executeQuery(query);
-            return sonuc.next();
+            if (sonuc.next()) {
+                this.eposta = eposta;
+                return true;
+            }
         } catch (Exception ex) {
             System.out.println("Operation Failed");
         }
+
         return false;
+    }
+
+    public String getEposta() {
+        return eposta;
     }
 }

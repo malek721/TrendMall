@@ -1,15 +1,18 @@
+package View;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
 
 public class UyeOlSayfa implements ActionListener {
-    TrendMallFrame uyeOlFrame;
+    MainFrame uyeOlFrame;
+
     HashMap<String, JButton> buttons = new HashMap<>();
     String[] buttonSwitchName = {"Giriş Yap", "Üye Ol"};
 
     HashMap<String, JTextField> inputs = new HashMap<>();
-    String[] inputsName = {"E-posta", "Ad", "Soyad", "Şifre", "Telefon Numarası", "Adres"};
+    String[] inputsName = {"Ad", "Soyad", "E-posta", "Şifre", "Telefon Numarası", "Adres"};
 
     HashMap<String, JRadioButton> kullaniciTuru = new HashMap<>();
     ButtonGroup kullanicilar;
@@ -118,7 +121,7 @@ public class UyeOlSayfa implements ActionListener {
         uyeOlButton.setFocusable(false);
         uyeOlButton.setBorder(null);
         uyeOlButton.addActionListener(this);
-        uyeOlFrame = new TrendMallFrame();
+        uyeOlFrame = new MainFrame();
         topPanel.add(imageContainer);
         uyeOlForm.add(message);
         uyeOlForm.add(buttonContainer, BorderLayout.NORTH);
@@ -137,25 +140,22 @@ public class UyeOlSayfa implements ActionListener {
             uyeOlFrame.dispose();
             new GirisSayfa();
         }
+    }
 
-        if (e.getSource() == uyeOlButton) {
-            String result = "";
-            AbstractButton selectedButton = kullanicilar.getElements().nextElement();
-            if (selectedButton != null) {
-                JRadioButton selectedRadioButton = (JRadioButton) selectedButton;
-                if (selectedRadioButton.getText().equals("Müşteri")) {
-                    result = UyeOl.addNewAccount("Musteri", inputs.get("Ad").getText().trim(), inputs.get("Soyad").getText().trim(),
-                            inputs.get("E-posta").getText().trim(), inputs.get("Şifre").getText().trim(),
-                            inputs.get("Telefon Numarası").getText().trim(), inputs.get("Adres").getText().trim());
-                } else {
-                    result = UyeOl.addNewAccount("Satici", inputs.get("Ad").getText().trim(), inputs.get("Soyad").getText().trim(),
-                            inputs.get("E-posta").getText().trim(), inputs.get("Şifre").getText().trim(),
-                            inputs.get("Telefon Numarası").getText().trim(), inputs.get("Adres").getText().trim());
 
-                }
-            }
-            message.setText(result);
-            message.setForeground(Color.RED);
-        }
+    public HashMap<String, JTextField> getInputs() {
+        return inputs;
+    }
+
+    public ButtonGroup getKullanicilar() {
+        return kullanicilar;
+    }
+
+    public JButton getUyeOlButton() {
+        return uyeOlButton;
+    }
+
+    public JLabel getMessage() {
+        return message;
     }
 }

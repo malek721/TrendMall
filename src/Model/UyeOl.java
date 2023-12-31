@@ -1,16 +1,20 @@
+package Model;
+
+import Connection.DBConnection;
+
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class UyeOl {
     static DBConnection conn = DBConnection.getInstance();
 
-    static public String addNewAccount(String kullanici, String ad, String soyad, String eposta, String sifre, String telNo, String adres) {
+    public String addNewUser(String kullanici, String ad, String soyad, String eposta, String sifre, String telNo, String adres) {
         Statement statement;
         String query;
         try {
-            if (kullanici.equals("Musteri")) {
-                if (checkInfo(kullanici, ad, soyad, eposta, sifre, telNo).isEmpty()) {
-                    query = "INSERT INTO " + kullanici + " VALUES (Default,'" + ad +
+            if (kullanici.equals("Müşteri")) {
+                if (checkInfo("Müşteri", ad, soyad, eposta, sifre, telNo).isEmpty()) {
+                    query = "INSERT INTO Musteri VALUES (Default,'" + ad +
                             "','" + soyad + "','" + eposta +
                             "','" + sifre + "','" + adres +
                             "','" + telNo + "')";

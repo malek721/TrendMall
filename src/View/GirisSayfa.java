@@ -1,3 +1,8 @@
+package View;
+
+import Controller.UyeOlController;
+import Model.UyeOl;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -5,11 +10,11 @@ import java.util.HashMap;
 
 public class GirisSayfa implements ActionListener {
     HashMap<String, JTextField> inputs = new HashMap<>();
-    String[] inputsName = {"E-posta", "Şifre"};
     HashMap<String, JButton> buttons = new HashMap<>();
+    String[] inputsName = {"E-posta", "Şifre"};
     String[] buttonSwitchName = {"Giriş Yap", "Üye Ol"};
     JButton girisYapButton;
-    TrendMallFrame girisFrame;
+    MainFrame girisFrame;
     JLabel message;
 
     public GirisSayfa() {
@@ -95,13 +100,13 @@ public class GirisSayfa implements ActionListener {
         girisYapButton.setBorder(null);
         girisYapButton.addActionListener(this);
         message = new JLabel("");
-        message.setBounds(130, 280, 350,20);
+        message.setBounds(130, 280, 350, 20);
         message.setFont(new Font("Poppins", Font.BOLD, 12));
         topPanel.add(imageContainer);
         girisForm.add(buttonContainer, BorderLayout.NORTH);
         girisForm.add(girisYapButton);
         girisForm.add(message);
-        girisFrame = new TrendMallFrame();
+        girisFrame = new MainFrame();
         girisFrame.add(topPanel, BorderLayout.NORTH);
         girisFrame.add(leftSidePanel, BorderLayout.WEST);
         girisFrame.add(rightSidePanel, BorderLayout.EAST);
@@ -113,19 +118,20 @@ public class GirisSayfa implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttons.get("Üye Ol")) {
+            new UyeOlController(new UyeOlSayfa(), new UyeOl());
             girisFrame.dispose();
-            new UyeOlSayfa();
         }
+    }
 
-        if (e.getSource() == girisYapButton) {
-            if(!GirisYapma.loggingIn(inputs.get("E-posta").getText().trim(), inputs.get("Şifre").getText().trim())){
-                message.setText("There is no user with this email or password");
-                message.setForeground(Color.RED);
-            }
-            else{
-                message.setText("Log in successful");
-                message.setForeground(Color.GREEN);
-            }
-        }
+    public JButton getGirisYapButton() {
+        return girisYapButton;
+    }
+
+    public JLabel getMessage() {
+        return message;
+    }
+
+    public HashMap<String, JTextField> getInputs() {
+        return inputs;
     }
 }
