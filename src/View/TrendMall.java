@@ -1,20 +1,23 @@
+package View;
+
+import Controller.GirisController;
+import Model.GirisYapma;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class LoadScreen{
-    public  LoadScreen(){
-        TrendMallFrame main = new TrendMallFrame();
+public class TrendMall {
+    public TrendMall() {
+        MainFrame main = new MainFrame();
         ImageIcon logo = new ImageIcon("img.png");
         JLabel imageContainer = new JLabel(logo);
         main.add(imageContainer, BorderLayout.CENTER);
         Timer timer = new Timer(3000, e -> {
-            // Code to be executed after the delay
-            new GirisYap();
+            new GirisController(new GirisSayfa(), new GirisYapma());
             main.dispose();
         });
 
-        // Start the timer
-        timer.setRepeats(false); // Set to execute only once
+        timer.setRepeats(false);
         timer.start();
     }
 
