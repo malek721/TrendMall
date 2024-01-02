@@ -13,8 +13,6 @@ public class UyeOlSayfa implements ActionListener {
 
     HashMap<String, JTextField> inputs = new HashMap<>();
     String[] inputsName = {"Ad", "Soyad", "E-posta", "Şifre", "Telefon Numarası", "Adres"};
-
-    HashMap<String, JRadioButton> kullaniciTuru = new HashMap<>();
     ButtonGroup kullanicilar;
     String[] kullanicilarNames = {"Müşteri", "Satıcı"};
 
@@ -101,7 +99,6 @@ public class UyeOlSayfa implements ActionListener {
         kullanicilar = new ButtonGroup();
         for (int i = 0; i < kullanicilarNames.length; i++) {
             JRadioButton kullanici = new JRadioButton(kullanicilarNames[i]);
-            kullaniciTuru.put(kullanicilarNames[i], kullanici);
             kullanici.setBounds(50 + (i * 110), 390, 100, 30);
             kullanici.setFocusable(false);
             kullanici.setBackground(new Color(0xF7F7F7));

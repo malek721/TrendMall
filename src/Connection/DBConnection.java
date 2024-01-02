@@ -8,7 +8,7 @@ public class DBConnection {
     private final static String username = "postgres";
     private final static String password = "AmrF.C.B";
     private static Connection conn = null;
-    private static final DBConnection dbconn = new DBConnection();
+    private static DBConnection dbconn;
 
     private DBConnection() {
         try {
@@ -25,6 +25,13 @@ public class DBConnection {
     }
 
     public static DBConnection getInstance() {
+        if (dbconn == null) {
+            synchronized (DBConnection.class) {
+                if (dbconn == null) {
+                    dbconn = new DBConnection();
+                }
+            }
+        }
         return dbconn;
     }
 
