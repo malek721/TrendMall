@@ -4,10 +4,8 @@ import Connection.DBConnection;
 import Model.KartOdeme;
 import Model.Odeme;
 import View.OdemeSayfa;
-import View.SiparisOzeti;
 
 import javax.swing.*;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
@@ -15,15 +13,13 @@ import java.time.LocalDate;
 public class OdemeController {
     private Odeme modelOdeme;
     private KartOdeme modelKartOdeme;
-    private SiparisOzeti siparisOzetiView;
-    private OdemeSayfa odemeSayfaView;
+    private OdemeSayfa view;
 
-    public OdemeController(Odeme modelOdeme, KartOdeme modelKartOdeme, OdemeSayfa odemeSayfaView, SiparisOzeti siparisOzetiView) {
+    public OdemeController(Odeme modelOdeme, KartOdeme modelKartOdeme, OdemeSayfa view) {
         this.modelOdeme = modelOdeme;
         this.modelKartOdeme = modelKartOdeme;
-        this.siparisOzetiView = siparisOzetiView;
-        this.odemeSayfaView = odemeSayfaView;
-        this.odemeSayfaView.getOdemeYap().addActionListener(e -> odemeBilgileriKaydet());
+        this.view = view;
+        this.view.getOdemeYap().addActionListener(e -> odemeBilgileriKaydet());
     }
 
     public void odemeBilgileriKaydet() {
@@ -31,39 +27,33 @@ public class OdemeController {
         String query;
         Statement statement;
         ResultSet sonuc;
-        LocalDate date = LocalDate.now();
         try {
-            query = "INSERT INTO Odeme VALUES (DEFAULT, " + Integer.parseInt(siparisOzetiView.getToplamUcret().getText()) +
-                    ", '" + date.getYear() + "-" + date.getMonth() + "-" + date.getDayOfMonth() + "')";
+            LocalDate date = LocalDate.now();
+            float toplamUcret = Float.parseFloat(view.getSiparisOzeti().getToplamUcret().getText());
+            query = "INSERT INTO Odeme VALUES (DEFAULT, " + toplamUcret + ", '" + date + "')";
             statement = conn.getConnection().createStatement();
             statement.executeUpdate(query);
-            AbstractButton selectedButton = odemeSayfaView.getSecenekler().getElements().nextElement();
+            AbstractButton selectedButton = view.getSecenekler().getElements().nextElement();
             JRadioButton selectedRadioButton = (JRadioButton) selectedButton;
             if (selectedRadioButton.getText().equals("Kredi Kart")) {
-                query = "SELECT max(id) FROM Odeme";
+                query = "SELECT max(id) as id FROM Odeme";
                 sonuc = statement.executeQuery(query);
                 if (sonuc.next()) {
-                    query = "INSERT INTO kart_odeme VALUES (" + sonuc.getString("id") +
-                            ",'" + odemeSayfaView.getKartSahibiAdi().getText().trim() +
-                            "','" + odemeSayfaView.getKartNo().getText().trim() + "','"
-                            + odemeSayfaView.getSonYilTarihi().getSelectedItem() + "-" + odemeSayfaView.getSonAyTarihi().getSelectedItem() + "- 01'"
-                            + Integer.parseInt(odemeSayfaView.getCvv().getText()) + " )";
+                    int id = Integer.parseInt(sonuc.getString("id"));
+                    String kartSahibiAdi = view.getKartSahibiAdi().getText().trim();
+                    String kartNo = view.getKartNo().getText().trim();
+                    String sonKullanmaTarihi = view.getSonYilTarihi().getSelectedItem() + "-" + view.getSonAyTarihi().getSelectedItem() + "-01";
+                    int cvv = Integer.parseInt(view.getCvv().getText().trim());
+                    query = "INSERT INTO kart_odeme VALUES (" + id + ",'" + kartSahibiAdi + "','"
+                            + kartNo + "','" + sonKullanmaTarihi + "'," + cvv + " )";
                     statement.executeUpdate(query);
-                    modelKartOdeme = new KartOdeme(Integer.parseInt(sonuc.getString("id")),
-                            Float.parseFloat(siparisOzetiView.getToplamUcret().getText()),
-                            date.getYear() + "-" + date.getMonth() + "-" + date.getDayOfMonth()
-                            , odemeSayfaView.getKartNo().getText().trim(), odemeSayfaView.getKartSahibiAdi().getText().trim(),
-                            odemeSayfaView.getSonYilTarihi().getSelectedItem() + "-" + odemeSayfaView.getSonAyTarihi().getSelectedItem() + "- 01'",
-                            Integer.parseInt(odemeSayfaView.getCvv().getText()));
+                    modelKartOdeme = new KartOdeme(id, toplamUcret, date.toString(), kartNo, kartSahibiAdi, sonKullanmaTarihi, cvv);
                 }
-            }
-            else {
-                query = "SELECT * FROM Odeme WHERE id = (SELECT max(id) FROM Odeme)";
+            } else {
+                query = "SELECT max(id) as id FROM Odeme";
                 sonuc = statement.executeQuery(query);
                 if (sonuc.next()) {
-                    modelOdeme = new Odeme(Integer.parseInt(sonuc.getString("id")),
-                            Float.parseFloat(sonuc.getString("odeme_tutari")),
-                            sonuc.getString("odeme_tarihi"));
+                    modelOdeme = new Odeme(Integer.parseInt(sonuc.getString("id")), toplamUcret, date.toString());
                 }
             }
 

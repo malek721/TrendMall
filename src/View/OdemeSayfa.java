@@ -1,9 +1,6 @@
 package View;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class OdemeSayfa{
     JTextField kartSahibiAdi;
@@ -17,6 +14,8 @@ public class OdemeSayfa{
     JTextField kod;
     JButton kodUygulama;
     JButton odemeYap;
+
+    SiparisOzeti siparisOzeti;
 
     public OdemeSayfa() {
         NavBar nav = new NavBar();
@@ -121,7 +120,7 @@ public class OdemeSayfa{
         odemeYap.setBackground(new Color(251,251,251));
         odemeYap.setBorder(BorderFactory.createLineBorder(new Color(0xD95927), 2));
         mainContent.add(odemeYap);
-        SiparisOzeti siparisOzeti = new SiparisOzeti();
+        siparisOzeti = new SiparisOzeti();
         mainContent.add(siparisOzeti.getOzet());
         mainContent.add(kartBilgiler);
         MainFrame main = new MainFrame();
@@ -159,5 +158,9 @@ public class OdemeSayfa{
 
     public ButtonGroup getSecenekler() {
         return secenekler;
+    }
+
+    public SiparisOzeti getSiparisOzeti() {
+        return siparisOzeti;
     }
 }

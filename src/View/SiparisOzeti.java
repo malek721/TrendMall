@@ -34,7 +34,7 @@ public class SiparisOzeti {
         urunUcretiTitle.setForeground(new Color(0x000000));
         urunUcretiTitle.setBounds(30, 93, 150, 30);
         ozet.add(urunUcretiTitle);
-        urunUcret = new JLabel("734 tl");
+        urunUcret = new JLabel("734");
         urunUcret.setFont(new Font("Inter", Font.BOLD, 22));
         urunUcret.setForeground(new Color(0x000000));
         urunUcret.setBounds(324, 93, 150, 30);
@@ -44,7 +44,7 @@ public class SiparisOzeti {
         kargoUcretiTitle.setForeground(new Color(0x000000));
         kargoUcretiTitle.setBounds(30, 131, 150, 30);
         ozet.add(kargoUcretiTitle);
-        kargoUcret = new JLabel("45 tl");
+        kargoUcret = new JLabel("45");
         kargoUcret.setFont(new Font("Inter", Font.BOLD, 22));
         kargoUcret.setForeground(new Color(0x000000));
         kargoUcret.setBounds(324, 131, 150, 30);
@@ -54,7 +54,7 @@ public class SiparisOzeti {
         toplamUcretiTitle.setForeground(new Color(0x000000));
         toplamUcretiTitle.setBounds(36, 211, 85, 30);
         ozet.add(toplamUcretiTitle);
-        toplamUcret = new JLabel("779 tl");
+        toplamUcret = new JLabel("779");
         toplamUcret.setFont(new Font("Inter", Font.BOLD, 22));
         toplamUcret.setForeground(new Color(0xD95927));
         toplamUcret.setBounds(324, 211, 150, 30);

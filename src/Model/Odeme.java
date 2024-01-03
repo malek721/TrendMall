@@ -5,6 +5,8 @@ public class Odeme {
     private float odemTutar;
     private String odemTarihi;
 
+    public Odeme() {
+    }
     public Odeme(int id, float odemeTutar, String odemeTarihi) {
         this.id = id;
         this.odemTutar = odemeTutar;

@@ -1,10 +1,10 @@
-import View.BasariliSiparis;
-import View.OdemeSayfa;
-import View.ProfileDuzenleme;
-import View.SaticiUrunEkleme;
+import Controller.OdemeController;
+import Model.KartOdeme;
+import Model.Odeme;
+import View.*;
 
 public class Main {
     public static void main(String[] args) {
-        new ProfileDuzenleme();
+
     }
 }

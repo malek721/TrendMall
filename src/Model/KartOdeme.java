@@ -6,6 +6,7 @@ public class KartOdeme extends Odeme{
     private String sonKullanmaTarihi;
     private int cvv;
 
+    public KartOdeme() {}
     public KartOdeme(int id, float odemTutar, String odemTarihi, String kartNo, String kartSahibiAdi, String sonKullanmaTarihi, int cvv) {
         super(id, odemTutar, odemTarihi);
         this.kartNo = kartNo;
