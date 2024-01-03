@@ -126,7 +126,7 @@ public class OdemeSayfa implements ActionListener {
         mainContent.add(siparisOzeti.getOzet());
         mainContent.add(kartBilgiler);
         MainFrame main = new MainFrame();
-        main.add(nav.getNavBar(), BorderLayout.NORTH);
+        main.add(nav, BorderLayout.NORTH);
         main.add(mainContent, BorderLayout.CENTER);
     }
 
