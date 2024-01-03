@@ -6,10 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class NavBar implements ActionListener {
-    JPanel navBar;
+    private final JPanel navBar;
 
-    JButton sepet;
-    JButton profil;
+    private JButton sepet;
+    private JButton profil;
 
     public NavBar() {
         navBar = new JPanel();
@@ -52,4 +52,8 @@ public class NavBar implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
         }
+
+    public JPanel getNavBar() {
+        return navBar;
+    }
 }

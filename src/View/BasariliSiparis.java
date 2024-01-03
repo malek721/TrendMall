@@ -39,7 +39,7 @@ public class BasariliSiparis implements ActionListener {
         mainPanel.add(imageContainer);
         mainPanel.add(anasayfa);
         MainFrame mainFrame = new MainFrame();
-        mainFrame.add(nav.navBar, BorderLayout.NORTH);
+        mainFrame.add(nav.getNavBar(), BorderLayout.NORTH);
         mainFrame.add(mainPanel, BorderLayout.CENTER);
     }
 

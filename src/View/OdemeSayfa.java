@@ -2,30 +2,32 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.text.DateFormatSymbols;
-import java.util.HashMap;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class OdemeSayfa {
+public class OdemeSayfa implements ActionListener {
     JTextField kartSahibiAdi;
     JTextField kartNo;
     JComboBox<Integer> sonAyTarihi;
     JComboBox<Integer> sonYilTarihi;
     JTextField cvv;
-    JComboBox<JLabel> kartTuru;
     String[] seceneklerAdi = {"Kredi Kart", "Nakit"};
     String[] kartBilgilerAd = {"Kart Sahibinin Adı", "Kart Numarası", "Son Kullanma Tarihi", "CVV"};
     ButtonGroup secenekler;
+    JTextField kod;
+    JButton kodUygulama;
+    JButton odemeYap;
 
     public OdemeSayfa() {
         NavBar nav = new NavBar();
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(null);
-        mainPanel.setBackground(new Color(251, 251, 251));
+        JPanel mainContent = new JPanel();
+        mainContent.setLayout(null);
+        mainContent.setBackground(new Color(251, 251, 251));
         JLabel title = new JLabel("ÖDEME SEÇENEKLERİ");
         title.setFont(new Font("Inter", Font.BOLD, 26));
         title.setForeground(new Color(0, 0, 0));
         title.setBounds(75, 57, 300, 35);
-        mainPanel.add(title);
+        mainContent.add(title);
         secenekler = new ButtonGroup();
         for (int i = 0; i < seceneklerAdi.length; i++) {
             JRadioButton secenek = new JRadioButton(seceneklerAdi[i]);
@@ -35,7 +37,7 @@ public class OdemeSayfa {
             secenek.setBounds(81 + (i * 619), 157, 170, 35);
             secenek.setFocusable(false);
             secenekler.add(secenek);
-            mainPanel.add(secenek);
+            mainContent.add(secenek);
         }
         JPanel kartBilgiler = new JPanel();
         kartBilgiler.setLayout(null);
@@ -83,9 +85,53 @@ public class OdemeSayfa {
         cvv.setBorder(BorderFactory.createLineBorder(new Color(0x919191), 1));
         cvv.setBounds(280, 245, 110, 62);
         kartBilgiler.add(cvv);
-        mainPanel.add(kartBilgiler);
+        JPanel kuponContainer = new JPanel();
+        kuponContainer.setLayout(null);
+        kuponContainer.setBackground(new Color(251, 251, 251));
+        kuponContainer.setBounds(1028, 366, 418, 115);
+        kuponContainer.setBorder(BorderFactory.createLineBorder(new Color(0xC3C3C3), 1));
+        mainContent.add(kuponContainer);
+        JLabel kuponContainerTitle = new JLabel("KUPON KODU");
+        kuponContainerTitle.setFont(new Font("Inter", Font.PLAIN, 18));
+        kuponContainerTitle.setForeground(new Color(0, 0, 0));
+        kuponContainerTitle.setBounds(35, 12, 125, 30);
+        kuponContainer.add(kuponContainerTitle);
+        kod = new JTextField("  ");
+        kod.setFont(new Font("Inter", Font.BOLD, 18));
+        kod.setBackground(new Color(0xD9D9D9));
+        kod.setForeground(new Color(0x111111));
+        kod.setBorder(null);
+        kod.setBounds(35, 51, 230, 40);
+        kuponContainer.add(kod);
+        kodUygulama = new JButton("UYGULA");
+        kodUygulama.setFont(new Font("Inter", Font.PLAIN, 16));
+        kodUygulama.setForeground(new Color(0xFFFFFFF));
+        kodUygulama.setBackground(new Color(0xD95927));
+        kodUygulama.setBounds(292, 50, 85, 40);
+        kodUygulama.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        kodUygulama.setFocusable(false);
+        kodUygulama.setBorder(null);
+        kuponContainer.add(kodUygulama);
+        odemeYap = new JButton("Ödeme Yap");
+        odemeYap.setFocusable(false);
+        odemeYap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        odemeYap.addActionListener(this);
+        odemeYap.setBounds(1139,505,166, 51 );
+        odemeYap.setFont(new Font("Inter", Font.BOLD, 26));
+        odemeYap.setForeground(new Color(0xD95927));
+        odemeYap.setBackground(new Color(251,251,251));
+        odemeYap.setBorder(BorderFactory.createLineBorder(new Color(0xD95927), 2));
+        mainContent.add(odemeYap);
+        SiparisOzeti siparisOzeti = new SiparisOzeti();
+        mainContent.add(siparisOzeti.getOzet());
+        mainContent.add(kartBilgiler);
         MainFrame main = new MainFrame();
-        main.add(nav.navBar, BorderLayout.NORTH);
-        main.add(mainPanel, BorderLayout.CENTER);
+        main.add(nav.getNavBar(), BorderLayout.NORTH);
+        main.add(mainContent, BorderLayout.CENTER);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }
