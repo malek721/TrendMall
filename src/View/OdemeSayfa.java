@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class OdemeSayfa implements ActionListener {
+public class OdemeSayfa{
     JTextField kartSahibiAdi;
     JTextField kartNo;
     JComboBox<Integer> sonAyTarihi;
@@ -115,7 +115,6 @@ public class OdemeSayfa implements ActionListener {
         odemeYap = new JButton("Ödeme Yap");
         odemeYap.setFocusable(false);
         odemeYap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        odemeYap.addActionListener(this);
         odemeYap.setBounds(1139,505,166, 51 );
         odemeYap.setFont(new Font("Inter", Font.BOLD, 26));
         odemeYap.setForeground(new Color(0xD95927));
@@ -130,8 +129,35 @@ public class OdemeSayfa implements ActionListener {
         main.add(mainContent, BorderLayout.CENTER);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    public JTextField getKartSahibiAdi() {
+        return kartSahibiAdi;
+    }
 
+    public JTextField getKartNo() {
+        return kartNo;
+    }
+
+    public JComboBox<Integer> getSonAyTarihi() {
+        return sonAyTarihi;
+    }
+
+    public JComboBox<Integer> getSonYilTarihi() {
+        return sonYilTarihi;
+    }
+
+    public JTextField getCvv() {
+        return cvv;
+    }
+
+    public JButton getKodUygulama() {
+        return kodUygulama;
+    }
+
+    public JButton getOdemeYap() {
+        return odemeYap;
+    }
+
+    public ButtonGroup getSecenekler() {
+        return secenekler;
     }
 }

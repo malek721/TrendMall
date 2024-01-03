@@ -12,7 +12,7 @@ public class GirisController {
     public GirisController(GirisSayfa view, GirisYapma model) {
         this.view = view;
         this.model = model;
-        view.getGirisYapButton().addActionListener(e -> getSignInMessage());
+        this.view.getGirisYapButton().addActionListener(e -> getSignInMessage());
     }
 
     private void getSignInMessage() {

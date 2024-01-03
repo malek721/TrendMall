@@ -73,6 +73,10 @@ public class SiparisOzeti {
         this.kargoUcret = kargoUcret;
     }
 
+    public JLabel getToplamUcret() {
+        return toplamUcret;
+    }
+
     public void setToplamUcret(JLabel toplamUcret) {
         this.toplamUcret = toplamUcret;
     }
