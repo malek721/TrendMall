@@ -80,4 +80,6 @@ public class SiparisOzeti {
     public void setToplamUcret(JLabel toplamUcret) {
         this.toplamUcret = toplamUcret;
     }
+
+
 }
