@@ -37,6 +37,7 @@ public class UrunlerList implements ActionListener {
         main.add(mainContent, BorderLayout.CENTER);
 
     }
+
     public void urunlerGoster(String kategori){
         urunList.removeAll();
         urunler = UrunController.urunEkle(kategori);
@@ -45,6 +46,7 @@ public class UrunlerList implements ActionListener {
             String urunAd = urun.getAd();
             String fiyat = String.valueOf(urun.getFiyat());
             UrunDisplay urunDisplay = new UrunDisplay(saticiAd, urunAd, fiyat);
+            urunDisplay.simdiAl.addActionListener(e -> main.dispose());
             urunList.add(urunDisplay);
         }
         main.revalidate();
@@ -54,6 +56,7 @@ public class UrunlerList implements ActionListener {
     public JComboBox<String> getKategori() {
         return kategori;
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {

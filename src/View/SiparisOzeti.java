@@ -7,7 +7,7 @@ public class SiparisOzeti {
     private JLabel urunUcret;
     private JLabel kargoUcret;
     private JLabel toplamUcret;
-    public SiparisOzeti(){
+    public SiparisOzeti(float urunFiyat){
         ozet = new JPanel(){
             @Override
             protected void paintComponent(Graphics g) {
@@ -34,7 +34,7 @@ public class SiparisOzeti {
         urunUcretiTitle.setForeground(new Color(0x000000));
         urunUcretiTitle.setBounds(30, 93, 150, 30);
         ozet.add(urunUcretiTitle);
-        urunUcret = new JLabel("734");
+        urunUcret = new JLabel(urunFiyat + " tl");
         urunUcret.setFont(new Font("Inter", Font.BOLD, 22));
         urunUcret.setForeground(new Color(0x000000));
         urunUcret.setBounds(324, 93, 150, 30);
@@ -44,7 +44,7 @@ public class SiparisOzeti {
         kargoUcretiTitle.setForeground(new Color(0x000000));
         kargoUcretiTitle.setBounds(30, 131, 150, 30);
         ozet.add(kargoUcretiTitle);
-        kargoUcret = new JLabel("45");
+        kargoUcret = new JLabel("45 tl");
         kargoUcret.setFont(new Font("Inter", Font.BOLD, 22));
         kargoUcret.setForeground(new Color(0x000000));
         kargoUcret.setBounds(324, 131, 150, 30);
@@ -54,7 +54,7 @@ public class SiparisOzeti {
         toplamUcretiTitle.setForeground(new Color(0x000000));
         toplamUcretiTitle.setBounds(36, 211, 85, 30);
         ozet.add(toplamUcretiTitle);
-        toplamUcret = new JLabel("779");
+        toplamUcret = new JLabel(urunFiyat + 45 +" tl");
         toplamUcret.setFont(new Font("Inter", Font.BOLD, 22));
         toplamUcret.setForeground(new Color(0xD95927));
         toplamUcret.setBounds(324, 211, 150, 30);
@@ -76,10 +76,4 @@ public class SiparisOzeti {
     public JLabel getToplamUcret() {
         return toplamUcret;
     }
-
-    public void setToplamUcret(JLabel toplamUcret) {
-        this.toplamUcret = toplamUcret;
-    }
-
-
 }

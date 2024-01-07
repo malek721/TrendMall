@@ -1,4 +1,6 @@
 package View;
+import Controller.UrunController;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -7,6 +9,7 @@ import java.awt.event.ActionListener;
 
 public class BasariliSiparis implements ActionListener {
     JButton anasayfa;
+    MainFrame mainFrame;
 
     public BasariliSiparis() {
         NavBar nav = new NavBar();
@@ -38,13 +41,16 @@ public class BasariliSiparis implements ActionListener {
         mainPanel.add(mesaj2);
         mainPanel.add(imageContainer);
         mainPanel.add(anasayfa);
-        MainFrame mainFrame = new MainFrame();
+        mainFrame = new MainFrame();
         mainFrame.add(nav, BorderLayout.NORTH);
         mainFrame.add(mainPanel, BorderLayout.CENTER);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(e.getSource() == anasayfa){
+            new UrunController(new UrunlerList());
+            mainFrame.dispose();
+        }
     }
 }

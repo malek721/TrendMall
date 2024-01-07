@@ -1,9 +1,12 @@
 package View;
 
+import Controller.OdemeController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class OdemeSayfa implements ActionListener {
@@ -14,7 +17,6 @@ public class OdemeSayfa implements ActionListener {
     JComboBox<Integer> sonYilTarihi;
     JTextField cvv;
     String[] seceneklerAdi = {"Kredi Kart", "Nakit"};
-    HashMap<String, JRadioButton> secenekler;
     String[] kartBilgilerAd = {"Kart Sahibinin Adı", "Kart Numarası", "Son Kullanma Tarihi", "CVV"};
     ButtonGroup seceneklerGroupButton;
     JTextField kod;
@@ -23,7 +25,7 @@ public class OdemeSayfa implements ActionListener {
 
     SiparisOzeti siparisOzeti;
 
-    public OdemeSayfa() {
+    public OdemeSayfa(ArrayList<String> urunFiyat) {
         NavBar nav = new NavBar();
         JPanel mainContent = new JPanel();
         mainContent.setLayout(null);
@@ -42,7 +44,6 @@ public class OdemeSayfa implements ActionListener {
             secenek.setBounds(81 + (i * 619), 157, 170, 35);
             secenek.setFocusable(false);
             seceneklerGroupButton.add(secenek);
-            secenekler.put(seceneklerAdi[i], secenek);
             mainContent.add(secenek);
         }
         JPanel kartBilgiler = new JPanel();
@@ -117,6 +118,7 @@ public class OdemeSayfa implements ActionListener {
         kodUygulama.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         kodUygulama.setFocusable(false);
         kodUygulama.setBorder(null);
+        kodUygulama.addActionListener(this);
         kuponContainer.add(kodUygulama);
         odemeYap = new JButton("Ödeme Yap");
         odemeYap.setFocusable(false);
@@ -128,12 +130,20 @@ public class OdemeSayfa implements ActionListener {
         odemeYap.setBorder(BorderFactory.createLineBorder(new Color(0xD95927), 2));
         odemeYap.addActionListener(this);
         mainContent.add(odemeYap);
-        siparisOzeti = new SiparisOzeti();
+        siparisOzeti = new SiparisOzeti(toplamFiyat(urunFiyat));
         mainContent.add(siparisOzeti.getOzet());
         mainContent.add(kartBilgiler);
         main = new MainFrame();
         main.add(nav, BorderLayout.NORTH);
         main.add(mainContent, BorderLayout.CENTER);
+    }
+
+    public float toplamFiyat(ArrayList<String> fiyatlar){
+        float toplam = 0;
+        for(String fiyat: fiyatlar){
+            toplam+=Float.parseFloat(fiyat);
+        }
+        return toplam;
     }
 
     public JTextField getKartSahibiAdi() {
@@ -156,20 +166,12 @@ public class OdemeSayfa implements ActionListener {
         return cvv;
     }
 
-    public JButton getKodUygulama() {
-        return kodUygulama;
-    }
-
     public JButton getOdemeYap() {
         return odemeYap;
     }
 
     public ButtonGroup getSeceneklerGroupButton() {
         return seceneklerGroupButton;
-    }
-
-    public HashMap<String, JRadioButton> getSecenekler() {
-        return secenekler;
     }
 
     public SiparisOzeti getSiparisOzeti() {
@@ -181,7 +183,10 @@ public class OdemeSayfa implements ActionListener {
         if (e.getSource() == odemeYap) {
             new BasariliSiparis();
             main.dispose();
+        }
 
+        if(e.getSource() == kodUygulama){
+            OdemeController.indrimYap(kod.getText().trim());
         }
     }
 }

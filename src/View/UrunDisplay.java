@@ -1,8 +1,15 @@
 package View;
+import Controller.OdemeController;
+import Model.KartOdeme;
+import Model.Odeme;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-public class UrunDisplay extends JPanel{
+public class UrunDisplay extends JPanel implements ActionListener {
     JLabel saticiAd;
     JLabel urunAd;
     JLabel urunFiyat;
@@ -33,6 +40,7 @@ public class UrunDisplay extends JPanel{
         simdiAl.setBorder(BorderFactory.createLineBorder(new Color(0xD95927),1));
         simdiAl.setFocusable(false);
         simdiAl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        simdiAl.addActionListener(this);
         sepeteEkle = new JButton("Sepete Ekle");
         sepeteEkle.setBorder(null);
         sepeteEkle.setFont(new Font("Inter", Font.BOLD, 14));
@@ -46,5 +54,14 @@ public class UrunDisplay extends JPanel{
         this.add(this.urunFiyat);
         this.add(simdiAl);
         this.add(sepeteEkle);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == simdiAl){
+            ArrayList<String> urunFiyat = new ArrayList<>();
+            urunFiyat.add(this.urunFiyat.getText().substring(0,this.urunFiyat.getText().length()-2));
+            new OdemeController(new Odeme(), new KartOdeme(),new OdemeSayfa(urunFiyat));
+        }
     }
 }

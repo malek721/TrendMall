@@ -21,8 +21,8 @@ public class SepetSayisi implements ActionListener{
         urunSayisi.setForeground(new Color(0, 0, 0));
         mainPanel.add(urunSayisi);
 
-        SiparisOzeti siparisOzeti = new SiparisOzeti();
-        mainPanel.add(siparisOzeti.getOzet());
+        //SiparisOzeti siparisOzeti = new SiparisOzeti();
+        //mainPanel.add(siparisOzeti.getOzet());
 
         SepetUnsuru  unsuru = new SepetUnsuru();
         mainPanel.add(unsuru);
