@@ -1,5 +1,8 @@
 package View;
 
+import Controller.GirisController;
+import Model.GirisYapma;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -13,8 +16,9 @@ public class UyeOlSayfa implements ActionListener {
 
     HashMap<String, JTextField> inputs = new HashMap<>();
     String[] inputsName = {"Ad", "Soyad", "E-posta", "Şifre", "Telefon Numarası", "Adres"};
-    ButtonGroup kullanicilar;
+    ButtonGroup kullanicilarButtonGroup;
     String[] kullanicilarNames = {"Müşteri", "Satıcı"};
+    HashMap<String, JRadioButton> kullanicilar = new HashMap<>();
 
     JButton uyeOlButton;
     JLabel message;
@@ -96,14 +100,15 @@ public class UyeOlSayfa implements ActionListener {
             inputs.put(inputsName[i], input);
             inputList.add(input);
         }
-        kullanicilar = new ButtonGroup();
+        kullanicilarButtonGroup = new ButtonGroup();
         for (int i = 0; i < kullanicilarNames.length; i++) {
             JRadioButton kullanici = new JRadioButton(kullanicilarNames[i]);
             kullanici.setBounds(50 + (i * 110), 390, 100, 30);
             kullanici.setFocusable(false);
             kullanici.setBackground(new Color(0xF7F7F7));
             kullanici.addActionListener(this);
-            kullanicilar.add(kullanici);
+            kullanicilarButtonGroup.add(kullanici);
+            kullanicilar.put(kullanicilarNames[i], kullanici);
             uyeOlForm.add(kullanici);
         }
         uyeOlForm.add(inputList);
@@ -135,17 +140,20 @@ public class UyeOlSayfa implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttons.get("Giriş Yap")) {
             uyeOlFrame.dispose();
-            new GirisSayfa();
+            new GirisController(new GirisSayfa(), new GirisYapma());
         }
     }
 
+    public HashMap<String, JRadioButton> getKullanicilar() {
+        return kullanicilar;
+    }
 
     public HashMap<String, JTextField> getInputs() {
         return inputs;
     }
 
-    public ButtonGroup getKullanicilar() {
-        return kullanicilar;
+    public ButtonGroup getKullanicilarButtonGroup() {
+        return kullanicilarButtonGroup;
     }
 
     public JButton getUyeOlButton() {

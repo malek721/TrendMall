@@ -22,7 +22,7 @@ public class OdemeController {
         this.view.getOdemeYap().addActionListener(e -> odemeBilgileriKaydet());
     }
 
-    public void odemeBilgileriKaydet() {
+    private void odemeBilgileriKaydet() {
         DBConnection conn = DBConnection.getInstance();
         String query;
         Statement statement;
@@ -33,13 +33,11 @@ public class OdemeController {
             query = "INSERT INTO Odeme VALUES (DEFAULT, " + toplamUcret + ", '" + date + "')";
             statement = conn.getConnection().createStatement();
             statement.executeUpdate(query);
-            AbstractButton selectedButton = view.getSecenekler().getElements().nextElement();
-            JRadioButton selectedRadioButton = (JRadioButton) selectedButton;
-            if (selectedRadioButton.getText().equals("Kredi Kart")) {
+            if (view.getSeceneklerGroupButton().getSelection().equals(view.getSecenekler().get("Kredi Kart"))) {
                 query = "SELECT max(id) as id FROM Odeme";
                 sonuc = statement.executeQuery(query);
                 if (sonuc.next()) {
-                    int id = Integer.parseInt(sonuc.getString("id"));
+                    int id = sonuc.getInt("id");
                     String kartSahibiAdi = view.getKartSahibiAdi().getText().trim();
                     String kartNo = view.getKartNo().getText().trim();
                     String sonKullanmaTarihi = view.getSonYilTarihi().getSelectedItem() + "-" + view.getSonAyTarihi().getSelectedItem() + "-01";
@@ -53,7 +51,7 @@ public class OdemeController {
                 query = "SELECT max(id) as id FROM Odeme";
                 sonuc = statement.executeQuery(query);
                 if (sonuc.next()) {
-                    modelOdeme = new Odeme(Integer.parseInt(sonuc.getString("id")), toplamUcret, date.toString());
+                    modelOdeme = new Odeme(sonuc.getInt("id"), toplamUcret, date.toString());
                 }
             }
 

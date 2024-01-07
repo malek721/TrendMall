@@ -9,8 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class UyeOlController {
-    UyeOlSayfa view;
-    UyeOl model;
+    private UyeOlSayfa view;
+    private UyeOl model;
 
     public UyeOlController(UyeOlSayfa view, UyeOl model) {
         this.view = view;
@@ -25,9 +25,11 @@ public class UyeOlController {
         String sifre = view.getInputs().get("Şifre").getText().trim();
         String telNo = view.getInputs().get("Telefon Numarası").getText().trim();
         String adres = view.getInputs().get("Adres").getText().trim();
-        AbstractButton selectedButton = view.getKullanicilar().getElements().nextElement();
-        JRadioButton selectedRadioButton = (JRadioButton) selectedButton;
-        String result = model.addNewUser(selectedRadioButton.getText(), ad, soyad, eposta, sifre, telNo, adres);
+        String result;
+        if(view.getKullanicilarButtonGroup().getSelection().equals(view.getKullanicilar().get("Müşteri")))
+            result = model.addNewUser("Musteri" , ad, soyad, eposta, sifre, telNo, adres);
+        else
+            result = model.addNewUser("Satici", ad, soyad, eposta, sifre, telNo, adres);
         view.getMessage().setText(result);
         view.getMessage().setForeground(Color.RED);
 

@@ -1,16 +1,22 @@
 package View;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
 
-public class OdemeSayfa{
+public class OdemeSayfa implements ActionListener {
+    MainFrame main;
     JTextField kartSahibiAdi;
     JTextField kartNo;
     JComboBox<Integer> sonAyTarihi;
     JComboBox<Integer> sonYilTarihi;
     JTextField cvv;
     String[] seceneklerAdi = {"Kredi Kart", "Nakit"};
+    HashMap<String, JRadioButton> secenekler;
     String[] kartBilgilerAd = {"Kart Sahibinin Adı", "Kart Numarası", "Son Kullanma Tarihi", "CVV"};
-    ButtonGroup secenekler;
+    ButtonGroup seceneklerGroupButton;
     JTextField kod;
     JButton kodUygulama;
     JButton odemeYap;
@@ -27,7 +33,7 @@ public class OdemeSayfa{
         title.setForeground(new Color(0, 0, 0));
         title.setBounds(75, 57, 300, 35);
         mainContent.add(title);
-        secenekler = new ButtonGroup();
+        seceneklerGroupButton = new ButtonGroup();
         for (int i = 0; i < seceneklerAdi.length; i++) {
             JRadioButton secenek = new JRadioButton(seceneklerAdi[i]);
             secenek.setFont(new Font("Inter", Font.BOLD, 24));
@@ -35,7 +41,8 @@ public class OdemeSayfa{
             secenek.setBackground(new Color(251, 251, 251));
             secenek.setBounds(81 + (i * 619), 157, 170, 35);
             secenek.setFocusable(false);
-            secenekler.add(secenek);
+            seceneklerGroupButton.add(secenek);
+            secenekler.put(seceneklerAdi[i], secenek);
             mainContent.add(secenek);
         }
         JPanel kartBilgiler = new JPanel();
@@ -114,16 +121,17 @@ public class OdemeSayfa{
         odemeYap = new JButton("Ödeme Yap");
         odemeYap.setFocusable(false);
         odemeYap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        odemeYap.setBounds(1139,505,166, 51 );
+        odemeYap.setBounds(1139, 505, 166, 51);
         odemeYap.setFont(new Font("Inter", Font.BOLD, 26));
         odemeYap.setForeground(new Color(0xD95927));
-        odemeYap.setBackground(new Color(251,251,251));
+        odemeYap.setBackground(new Color(251, 251, 251));
         odemeYap.setBorder(BorderFactory.createLineBorder(new Color(0xD95927), 2));
+        odemeYap.addActionListener(this);
         mainContent.add(odemeYap);
         siparisOzeti = new SiparisOzeti();
         mainContent.add(siparisOzeti.getOzet());
         mainContent.add(kartBilgiler);
-        MainFrame main = new MainFrame();
+        main = new MainFrame();
         main.add(nav, BorderLayout.NORTH);
         main.add(mainContent, BorderLayout.CENTER);
     }
@@ -156,11 +164,24 @@ public class OdemeSayfa{
         return odemeYap;
     }
 
-    public ButtonGroup getSecenekler() {
+    public ButtonGroup getSeceneklerGroupButton() {
+        return seceneklerGroupButton;
+    }
+
+    public HashMap<String, JRadioButton> getSecenekler() {
         return secenekler;
     }
 
     public SiparisOzeti getSiparisOzeti() {
         return siparisOzeti;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == odemeYap) {
+            new BasariliSiparis();
+            main.dispose();
+
+        }
     }
 }

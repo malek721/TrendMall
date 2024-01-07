@@ -17,7 +17,7 @@ public class KullaniciFactory implements KullaniciFactoryI {
             statement = conn.getConnection().createStatement();
             sonuc = statement.executeQuery(query);
             if (sonuc.next()) {
-                int id = Integer.parseInt(sonuc.getString("id"));
+                int id = sonuc.getInt("id");
                 String ad = sonuc.getString("ad");
                 String soyad = sonuc.getString("soyad");
                 String sifre = sonuc.getString("sifre");
@@ -28,13 +28,13 @@ public class KullaniciFactory implements KullaniciFactoryI {
             query = "SELECT * FROM Satici WHERE eposta = '" + eposta + "'";
             statement = conn.getConnection().createStatement();
             sonuc = statement.executeQuery(query);
-            int id = Integer.parseInt(sonuc.getString("id"));
+            int id = sonuc.getInt("id");
             String ad = sonuc.getString("ad");
             String soyad = sonuc.getString("soyad");
             String sifre = sonuc.getString("sifre");
             String adres = sonuc.getString("adres");
             String telNo = sonuc.getString("tel_no");
-            return new Satici(id, ad, soyad, eposta, sifre, adres, telNo);
+            //return new Satici(id, ad, soyad, eposta, sifre, adres, telNo);
         } catch (Exception e) {
             System.out.println(e);
         }

@@ -12,30 +12,17 @@ public class UyeOl {
         Statement statement;
         String query;
         try {
-            if (kullanici.equals("Müşteri")) {
-                if (checkInfo("Müşteri", ad, soyad, eposta, sifre, telNo).isEmpty()) {
-                    query = "INSERT INTO Musteri VALUES (Default,'" + ad +
-                            "','" + soyad + "','" + eposta +
-                            "','" + sifre + "','" + adres +
-                            "','" + telNo + "')";
-                    statement = conn.getConnection().createStatement();
-                    statement.executeUpdate(query);
-                } else {
-                    return checkInfo("Musteri", ad, soyad, eposta, sifre, telNo);
-                }
-            } else {
-                if (checkInfo("Satici", ad, soyad, eposta, sifre, telNo).isEmpty()) {
-                    query = "INSERT INTO Satici VALUES (Default,'" + ad +
-                            "','" + soyad + "','" + eposta +
-                            "','" + sifre + "','" + adres +
-                            "','" + telNo + "')";
-                    statement = conn.getConnection().createStatement();
-                    statement.executeUpdate(query);
-                } else {
-                    return checkInfo("Satici", ad, soyad, eposta, sifre, telNo);
-                }
-            }
-        } catch (Exception ex) {
+            if (checkInfo(kullanici, ad, soyad, eposta, sifre, telNo).isEmpty()) {
+                query = "INSERT INTO " + kullanici + " VALUES (Default,'" + ad +
+                        "','" + soyad + "','" + eposta +
+                        "','" + sifre + "','" + adres +
+                        "','" + telNo + "')";
+                statement = conn.getConnection().createStatement();
+                statement.executeUpdate(query);
+            } else
+                return checkInfo(kullanici, ad, soyad, eposta, sifre, telNo);
+        } catch (
+                Exception ex) {
             System.out.println("Operation Failed");
         }
         return "";
@@ -61,8 +48,7 @@ public class UyeOl {
             if (!sonuc.next()) {
                 if (eposta.length() > 50 || !(eposta.indexOf('@') >= 0))
                     return "E-posta 50 karekterden az oluşur ve @ sembol içerir";
-            }
-            else {
+            } else {
                 return "E-posta zaten alındı";
             }
         } catch (Exception e) {

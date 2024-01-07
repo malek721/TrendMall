@@ -71,6 +71,13 @@ public class ProfileDuzenleme implements ActionListener {
         sifre.setBounds(140, 400, 380, 50);
         musteriB.add(sifre);
 
+        kayidetBtn = new JButton("Kaydet");
+        kayidetBtn.setBounds(380, 480, 140, 40);
+        kayidetBtn.setForeground(new Color(0xF4F4F4));
+        kayidetBtn.setBackground(new Color(0xFA6930));
+        kayidetBtn.setFont(new Font("Poppins", Font.BOLD, 16));
+        musteriB.add(kayidetBtn);
+
         mainPanel.add(musteriB);
         MainFrame main = new MainFrame();
         main.add(nav, BorderLayout.NORTH);
