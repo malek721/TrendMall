@@ -16,11 +16,11 @@ public class UrunDisplay extends JPanel{
         this.saticiAd = new JLabel(saticiAd);
         this.saticiAd.setFont(new Font("Inter", Font.BOLD, 20));
         this.saticiAd.setForeground(Color.BLACK);
-        this.saticiAd.setBounds(0, 0, 150,30);
+        this.saticiAd.setBounds(0, 0, 180,30);
         this.urunAd = new JLabel(urunAd);
         this.urunAd.setFont(new Font("Inter", Font.PLAIN, 20));
         this.urunAd.setForeground(Color.BLACK);
-        this.urunAd.setBounds(170, 0, 120,30);
+        this.urunAd.setBounds(170, 0, 150,30);
         this.urunFiyat = new JLabel(urunFiyat+" tl");
         this.urunFiyat.setFont(new Font("Inter", Font.BOLD, 20));
         this.urunFiyat.setForeground(new Color(0xD95927));

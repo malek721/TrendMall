@@ -1,17 +1,19 @@
 package View;
 
 import Controller.UrunController;
+import Model.Kategori;
 import Model.Urun;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class UrunlerList {
+public class UrunlerList implements ActionListener {
     JPanel urunList;
-    MainFrame main;
+    MainFrame main = new MainFrame();;
     ArrayList<Urun> urunler;
-    JTextField urunArayin;
     JComboBox<String> kategori;
 
     public UrunlerList() {
@@ -23,54 +25,41 @@ public class UrunlerList {
         kategori.setBackground(new Color(0xF7F7F7));
         kategori.setFont(new Font("Inter", Font.PLAIN, 20));
         kategori.setBounds(1071, 52, 290, 60);
-        urunArayin = new JTextField("  Ürün Arayın");
-        urunArayin.setBackground(new Color(0xD9D9D9));
-        urunArayin.setForeground(new Color(0x5A5959));
-        urunArayin.setFont(new Font("Inter", Font.PLAIN, 24));
-        urunArayin.setBorder(null);
-        urunArayin.setBounds(130, 52, 430, 55);
+        kategori.addActionListener(this);
         urunList  = new JPanel(new FlowLayout(FlowLayout.LEADING, 5, 30));
         urunList.setBackground(new Color(0xFBFBFB));
-        urunList.setBounds(58, 188, 1450, 450);
-        urunler = new ArrayList<>();
+        urunlerGoster(kategori.getSelectedItem().toString());
+        JScrollPane scroll = new JScrollPane(urunList);
+        scroll.setBounds(58, 300, 1450, 300);
+        mainContent.add(scroll);
+        mainContent.add(kategori);
+        main.add(nav, BorderLayout.NORTH);
+        main.add(mainContent, BorderLayout.CENTER);
+
+    }
+    public void urunlerGoster(String kategori){
+        urunList.removeAll();
+        urunler = UrunController.urunEkle(kategori);
         for (Urun urun : urunler) {
-            String saticiAd = urun.getSatici().getSb().getAd();
+            String saticiAd = urun.getSatici().getSb().getAd()+ " " + urun.getSatici().getSb().getSoyad();
             String urunAd = urun.getAd();
             String fiyat = String.valueOf(urun.getFiyat());
             UrunDisplay urunDisplay = new UrunDisplay(saticiAd, urunAd, fiyat);
             urunList.add(urunDisplay);
         }
-        mainContent.add(urunList);
-        mainContent.add(kategori);
-        mainContent.add(urunArayin);
-        main = new MainFrame();
-        main.add(nav, BorderLayout.NORTH);
-        main.add(mainContent, BorderLayout.CENTER);
-
-    }
-
-    public void urunEkle(){
-        urunList.removeAll();
-        UrunController controller = new UrunController();
-        controller.urunEkle();
         main.revalidate();
         main.repaint();
-    }
-
-
-    public JTextField getUrunArayin() {
-        return urunArayin;
-    }
-
-    public void setUrunArayin(JTextField urunArayin) {
-        this.urunArayin = urunArayin;
     }
 
     public JComboBox<String> getKategori() {
         return kategori;
     }
 
-    public ArrayList<Urun> getUrunler() {
-        return urunler;
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == kategori){
+            String selectedKategori = kategori.getSelectedItem().toString();
+            urunlerGoster(selectedKategori);
+        }
     }
 }

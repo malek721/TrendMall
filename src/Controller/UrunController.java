@@ -25,10 +25,15 @@ public class UrunController {
         }
     }
 
-    public void urunEkle() {
+    static public ArrayList<Urun> urunEkle(String kategoriAd) {
         DBConnection conn = DBConnection.getInstance();
+        ArrayList<Urun> urunler = new ArrayList<>();
+        ResultSet sonuc;
         try {
-            ResultSet sonuc = UrunDB.urunBilgileriGetir(conn);
+            if(kategoriAd.equals("Katogori Seç"))
+                sonuc = UrunDB.urunBilgileriGetir(conn);
+            else
+                sonuc = UrunDB.urunBilgileriGetir(conn, kategoriAd);
             while (sonuc.next()) {
                 int id = sonuc.getInt("id");
                 String ad = sonuc.getString("ad");
@@ -36,11 +41,11 @@ public class UrunController {
                 float fiyat = sonuc.getFloat("fiyat");
                 Satici satici = SaticiDB.saticiBilgileriGetir(conn, sonuc.getInt("satici_id"));
                 Kategori kategori = KategoriDB.kategriGetir(conn, sonuc.getInt("katogori_id"));
-                view.getUrunler().add(new Urun(id, satici, ad, fiyat, kategori, miktar));
+                urunler.add(new Urun(id, satici, ad, fiyat, kategori, miktar));
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-
+        return urunler;
     }
 }

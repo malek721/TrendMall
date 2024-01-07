@@ -32,7 +32,7 @@ public class KategoriDB {
         ResultSet sonuc;
         String query;
         try {
-            query = "SELECT id FROM katogori WHERE = '" + kategriAd + "'";
+            query = "SELECT id FROM katogori WHERE ad = '" + kategriAd + "'";
             statement = conn.getConnection().createStatement();
             sonuc = statement.executeQuery(query);
             if (sonuc.next()) {
