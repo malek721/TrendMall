@@ -2,18 +2,17 @@ package Controller;
 
 import Connection.DBConnection;
 import Model.*;
+import View.UrunDisplay;
 import View.UrunlerList;
 
-import javax.swing.*;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class UrunController {
+public class UrunListController {
+
     UrunlerList view;
 
-    public UrunController() {}
-
-    public UrunController(UrunlerList view) {
+    public UrunListController(UrunlerList view) {
         this.view = view;
         addKategories();
     }

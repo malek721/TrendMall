@@ -8,4 +8,12 @@ public class Musteri implements Kullanici {
         this.id = id;
         mb = new MusteriBilgileri(ad,soyad,eposta,sifre,adres,telNo);
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public MusteriBilgileri getMb() {
+        return mb;
+    }
 }

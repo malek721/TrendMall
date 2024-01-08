@@ -1,27 +1,29 @@
 package View;
 
+import Model.Satici;
+import Model.Urun;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class SepetUnsuru extends JPanel{
     private JLabel saticiAdi,urunAdi,urunSayisi,fiyat;
     private JButton arti,eksi,remove;
-    public SepetUnsuru() {
-        this.setBounds(60, 100, 880, 80);
+    public SepetUnsuru(Urun urun) {
         this.setBackground(new Color(0xFAFAFA));
         this.setBorder(BorderFactory.createLineBorder(new Color(0xC3C3C3), 1));
         this.setLayout(null);
-
-        saticiAdi = new JLabel("Satici Adi");
+        String saticiIsim = urun.getSatici().getSb().getAd() +" "+ urun.getSatici().getSb().getSoyad();
+        saticiAdi = new JLabel(saticiIsim);
         saticiAdi.setFont(new Font("Inter", Font.BOLD, 18));
         saticiAdi.setForeground(new Color(0x000000));
-        saticiAdi.setBounds(20, 20, 140, 40);
+        saticiAdi.setBounds(20, 20, 180, 40);
         this.add(saticiAdi);
 
-        urunAdi = new JLabel("Urun Adi");
+        urunAdi = new JLabel(urun.getAd());
         urunAdi.setFont(new Font("Inter", Font.BOLD, 18));
         urunAdi.setForeground(new Color(0x000000));
-        urunAdi.setBounds(170, 20, 140, 40);
+        urunAdi.setBounds(200, 20, 140, 40);
         this.add(urunAdi);
 
         eksi = new JButton("-");
@@ -34,7 +36,7 @@ public class SepetUnsuru extends JPanel{
         eksi.setBorder(BorderFactory.createLineBorder(new Color(0x0D95927, true), 2));
         this.add(eksi);
 
-        urunSayisi =new JLabel("2");
+        urunSayisi =new JLabel("1");
         urunSayisi.setFont(new Font("Inter", Font.BOLD, 18));
         urunSayisi.setForeground(new Color(0x000000));
         urunSayisi.setBounds(435, 20, 80, 40);

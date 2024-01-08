@@ -1,6 +1,7 @@
 package View;
 
 import Controller.OdemeController;
+import Model.Urun;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +26,7 @@ public class OdemeSayfa implements ActionListener {
 
     SiparisOzeti siparisOzeti;
 
-    public OdemeSayfa(ArrayList<String> urunFiyat) {
+    public OdemeSayfa(float urunFiyat) {
         NavBar nav = new NavBar();
         JPanel mainContent = new JPanel();
         mainContent.setLayout(null);
@@ -130,7 +131,7 @@ public class OdemeSayfa implements ActionListener {
         odemeYap.setBorder(BorderFactory.createLineBorder(new Color(0xD95927), 2));
         odemeYap.addActionListener(this);
         mainContent.add(odemeYap);
-        siparisOzeti = new SiparisOzeti(toplamFiyat(urunFiyat));
+        siparisOzeti = new SiparisOzeti(urunFiyat);
         mainContent.add(siparisOzeti.getOzet());
         mainContent.add(kartBilgiler);
         main = new MainFrame();
@@ -138,10 +139,10 @@ public class OdemeSayfa implements ActionListener {
         main.add(mainContent, BorderLayout.CENTER);
     }
 
-    public float toplamFiyat(ArrayList<String> fiyatlar){
+    public float toplamFiyat(ArrayList<Urun> urunler){
         float toplam = 0;
-        for(String fiyat: fiyatlar){
-            toplam+=Float.parseFloat(fiyat);
+        for(Urun urun: urunler){
+            toplam+= urun.getFiyat();
         }
         return toplam;
     }

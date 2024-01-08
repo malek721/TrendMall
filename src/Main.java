@@ -1,9 +1,9 @@
-import Controller.UrunController;
+import Controller.UrunListController;
 import View.*;
 
 public class Main {
     public static void main(String[] args) {
 
-        new UrunController(new UrunlerList());
+        new UrunListController(new UrunlerList());
     }
 }

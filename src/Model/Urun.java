@@ -1,12 +1,12 @@
 package Model;
 
 public class Urun {
-    int id;
-    Satici satici;
-    String ad;
-    float fiyat;
-    Kategori kategori;
-    int miktar;
+    private int id;
+    private Satici satici;
+    private String ad;
+    private float fiyat;
+    private Kategori kategori;
+    private int miktar;
 
     public Urun (){
 

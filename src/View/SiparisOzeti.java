@@ -37,7 +37,7 @@ public class SiparisOzeti {
         urunUcret = new JLabel(urunFiyat + " tl");
         urunUcret.setFont(new Font("Inter", Font.BOLD, 22));
         urunUcret.setForeground(new Color(0x000000));
-        urunUcret.setBounds(324, 93, 150, 30);
+        urunUcret.setBounds(300, 93, 150, 30);
         ozet.add(urunUcret);
         JLabel kargoUcretiTitle = new JLabel("Kargo ücreti");
         kargoUcretiTitle.setFont(new Font("Inter", Font.PLAIN, 22));
@@ -47,7 +47,7 @@ public class SiparisOzeti {
         kargoUcret = new JLabel("45 tl");
         kargoUcret.setFont(new Font("Inter", Font.BOLD, 22));
         kargoUcret.setForeground(new Color(0x000000));
-        kargoUcret.setBounds(324, 131, 150, 30);
+        kargoUcret.setBounds(300, 131, 150, 30);
         ozet.add(kargoUcret);
         JLabel toplamUcretiTitle = new JLabel("Toplam");
         toplamUcretiTitle.setFont(new Font("Inter", Font.BOLD, 22));
@@ -57,7 +57,7 @@ public class SiparisOzeti {
         toplamUcret = new JLabel(urunFiyat + 45 +" tl");
         toplamUcret.setFont(new Font("Inter", Font.BOLD, 22));
         toplamUcret.setForeground(new Color(0xD95927));
-        toplamUcret.setBounds(324, 211, 150, 30);
+        toplamUcret.setBounds(300, 211, 150, 30);
         ozet.add(toplamUcret);
     }
 

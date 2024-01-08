@@ -1,5 +1,7 @@
 package View;
 
+import Model.Sepet;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -41,5 +43,13 @@ public class NavBar extends JPanel{
         profil.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.add(profil);
         this.add(sepet);
+    }
+
+    public JButton getSepet() {
+        return sepet;
+    }
+
+    public JButton getProfil() {
+        return profil;
     }
 }
