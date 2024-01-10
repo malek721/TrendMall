@@ -34,21 +34,6 @@ public class SaticiDB {
         return null;
     }
 
-    static public ResultSet saticiBilgileriGetir(DBConnection conn, String mail) {
-        Statement statement;
-        ResultSet sonuc;
-        String query;
-        try {
-            query = "SELECT * FROM Satici WHERE eposta =" + mail + " ";
-            statement = conn.getConnection().createStatement();
-            sonuc = statement.executeQuery(query);
-            return sonuc;
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return null;
-    }
-
     static private ArrayList<Urun> saticiUrunleriGetir(DBConnection conn, Satici satici) {
         ArrayList<Urun> urunler = new ArrayList<>();
         Statement statement;

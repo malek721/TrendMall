@@ -11,22 +11,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class OdemeSayfa implements ActionListener {
-    MainFrame main;
-    JTextField kartSahibiAdi;
-    JTextField kartNo;
-    JComboBox<Integer> sonAyTarihi;
-    JComboBox<Integer> sonYilTarihi;
-    JTextField cvv;
-    String[] seceneklerAdi = {"Kredi Kart", "Nakit"};
-    String[] kartBilgilerAd = {"Kart Sahibinin Adı", "Kart Numarası", "Son Kullanma Tarihi", "CVV"};
-    ButtonGroup seceneklerGroupButton;
-    JTextField kod;
-    JButton kodUygulama;
-    JButton odemeYap;
+    private ArrayList<Urun> urunler;
+    private MainFrame main;
+    private JTextField kartSahibiAdi;
+    private JTextField kartNo;
+    private JComboBox<Integer> sonAyTarihi;
+    private JComboBox<Integer> sonYilTarihi;
+    private JTextField cvv;
+    private ButtonGroup seceneklerGroupButton;
+    private JTextField kod;
+    private JButton kodUygulama;
+    private JButton odemeYap;
 
-    SiparisOzeti siparisOzeti;
+    private SiparisOzeti siparisOzeti;
 
-    public OdemeSayfa(float urunFiyat) {
+    public OdemeSayfa(ArrayList<Urun> urunler) {
+        this.urunler = urunler;
         NavBar nav = new NavBar();
         JPanel mainContent = new JPanel();
         mainContent.setLayout(null);
@@ -37,8 +37,10 @@ public class OdemeSayfa implements ActionListener {
         title.setBounds(75, 57, 300, 35);
         mainContent.add(title);
         seceneklerGroupButton = new ButtonGroup();
+        String[] seceneklerAdi = {"Kredi Kart", "Nakit"};
         for (int i = 0; i < seceneklerAdi.length; i++) {
             JRadioButton secenek = new JRadioButton(seceneklerAdi[i]);
+            secenek.setActionCommand(seceneklerAdi[i]);
             secenek.setFont(new Font("Inter", Font.BOLD, 24));
             secenek.setForeground(new Color(0, 0, 0));
             secenek.setBackground(new Color(251, 251, 251));
@@ -52,6 +54,7 @@ public class OdemeSayfa implements ActionListener {
         kartBilgiler.setBackground(new Color(251, 251, 251));
         kartBilgiler.setBorder(BorderFactory.createLineBorder(new Color(0xBEBCBC), 1));
         kartBilgiler.setBounds(75, 205, 570, 350);
+        String[] kartBilgilerAd = {"Kart Sahibinin Adı", "Kart Numarası", "Son Kullanma Tarihi", "CVV"};
         for (int i = 0; i < kartBilgilerAd.length; i++) {
             JLabel label = new JLabel(kartBilgilerAd[i]);
             label.setFont(new Font("Poppins", Font.PLAIN, 15));
@@ -62,18 +65,21 @@ public class OdemeSayfa implements ActionListener {
             label.setForeground(new Color(0, 0, 0));
             kartBilgiler.add(label);
         }
+
         kartSahibiAdi = new JTextField("  ");
         kartSahibiAdi.setFont(new Font("Poppins", Font.BOLD, 18));
         kartSahibiAdi.setBackground(new Color(0xE7E7E7));
         kartSahibiAdi.setBorder(BorderFactory.createLineBorder(new Color(0x919191), 1));
         kartSahibiAdi.setBounds(35, 45, 500, 62);
         kartBilgiler.add(kartSahibiAdi);
+
         kartNo = new JTextField("  ");
         kartNo.setFont(new Font("Poppins", Font.BOLD, 18));
         kartNo.setBackground(new Color(0xE7E7E7));
         kartNo.setBorder(BorderFactory.createLineBorder(new Color(0x919191), 1));
         kartNo.setBounds(35, 145, 500, 62);
         kartBilgiler.add(kartNo);
+
         sonAyTarihi = new JComboBox<>(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12});
         sonAyTarihi.setSelectedIndex(0);
         sonAyTarihi.setFont(new Font("Poppins", Font.BOLD, 18));
@@ -81,29 +87,34 @@ public class OdemeSayfa implements ActionListener {
         sonAyTarihi.setBorder(BorderFactory.createLineBorder(new Color(0x919191), 1));
         sonAyTarihi.setBounds(35, 245, 110, 62);
         kartBilgiler.add(sonAyTarihi);
+
         sonYilTarihi = new JComboBox<>(new Integer[]{2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031});
         sonYilTarihi.setFont(new Font("Poppins", Font.BOLD, 18));
         sonYilTarihi.setBackground(new Color(0xE7E7E7));
         sonYilTarihi.setBorder(BorderFactory.createLineBorder(new Color(0x919191), 1));
         sonYilTarihi.setBounds(150, 245, 110, 62);
         kartBilgiler.add(sonYilTarihi);
+
         cvv = new JTextField("  ");
         cvv.setFont(new Font("Poppins", Font.BOLD, 18));
         cvv.setBackground(new Color(0xE7E7E7));
         cvv.setBorder(BorderFactory.createLineBorder(new Color(0x919191), 1));
         cvv.setBounds(280, 245, 110, 62);
         kartBilgiler.add(cvv);
+
         JPanel kuponContainer = new JPanel();
         kuponContainer.setLayout(null);
         kuponContainer.setBackground(new Color(251, 251, 251));
         kuponContainer.setBounds(1028, 366, 418, 115);
         kuponContainer.setBorder(BorderFactory.createLineBorder(new Color(0xC3C3C3), 1));
         mainContent.add(kuponContainer);
+
         JLabel kuponContainerTitle = new JLabel("KUPON KODU");
         kuponContainerTitle.setFont(new Font("Inter", Font.PLAIN, 18));
         kuponContainerTitle.setForeground(new Color(0, 0, 0));
         kuponContainerTitle.setBounds(35, 12, 125, 30);
         kuponContainer.add(kuponContainerTitle);
+
         kod = new JTextField("  ");
         kod.setFont(new Font("Inter", Font.BOLD, 18));
         kod.setBackground(new Color(0xD9D9D9));
@@ -111,6 +122,7 @@ public class OdemeSayfa implements ActionListener {
         kod.setBorder(null);
         kod.setBounds(35, 51, 230, 40);
         kuponContainer.add(kod);
+
         kodUygulama = new JButton("UYGULA");
         kodUygulama.setFont(new Font("Inter", Font.PLAIN, 16));
         kodUygulama.setForeground(new Color(0xFFFFFFF));
@@ -121,6 +133,7 @@ public class OdemeSayfa implements ActionListener {
         kodUygulama.setBorder(null);
         kodUygulama.addActionListener(this);
         kuponContainer.add(kodUygulama);
+
         odemeYap = new JButton("Ödeme Yap");
         odemeYap.setFocusable(false);
         odemeYap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -131,8 +144,9 @@ public class OdemeSayfa implements ActionListener {
         odemeYap.setBorder(BorderFactory.createLineBorder(new Color(0xD95927), 2));
         odemeYap.addActionListener(this);
         mainContent.add(odemeYap);
-        siparisOzeti = new SiparisOzeti(urunFiyat);
-        mainContent.add(siparisOzeti.getOzet());
+
+        siparisOzeti = new SiparisOzeti(toplamFiyat(urunler));
+        mainContent.add(siparisOzeti);
         mainContent.add(kartBilgiler);
         main = new MainFrame();
         main.add(nav, BorderLayout.NORTH);
@@ -177,6 +191,10 @@ public class OdemeSayfa implements ActionListener {
 
     public SiparisOzeti getSiparisOzeti() {
         return siparisOzeti;
+    }
+
+    public ArrayList<Urun> getUrunler() {
+        return urunler;
     }
 
     @Override

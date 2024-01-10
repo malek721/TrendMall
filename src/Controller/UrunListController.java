@@ -10,10 +10,11 @@ import java.util.ArrayList;
 
 public class UrunListController {
 
-    UrunlerList view;
+    private static DBConnection conn = DBConnection.getInstance();
+    private static UrunlerList view;
 
     public UrunListController(UrunlerList view) {
-        this.view = view;
+        UrunListController.view = view;
         addKategories();
     }
 
@@ -25,7 +26,6 @@ public class UrunListController {
     }
 
     static public ArrayList<Urun> urunEkle(String kategoriAd) {
-        DBConnection conn = DBConnection.getInstance();
         ArrayList<Urun> urunler = new ArrayList<>();
         ResultSet sonuc;
         try {
@@ -47,4 +47,6 @@ public class UrunListController {
         }
         return urunler;
     }
+
+
 }

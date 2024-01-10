@@ -1,5 +1,6 @@
 package View;
 import Controller.UrunListController;
+import Model.UrunDB;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -8,8 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class BasariliSiparis implements ActionListener {
-    JButton anasayfa;
-    MainFrame mainFrame;
+    private JButton anasayfa;
+    private MainFrame mainFrame;
 
     public BasariliSiparis() {
         NavBar nav = new NavBar();

@@ -3,12 +3,14 @@ package Controller;
 import Connection.DBConnection;
 import Model.KartOdeme;
 import Model.Odeme;
+import Model.Urun;
 import View.OdemeSayfa;
 
 import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Enumeration;
 
 public class OdemeController {
@@ -36,10 +38,7 @@ public class OdemeController {
             query = "INSERT INTO Odeme VALUES (DEFAULT, " + toplamUcret + ", '" + date + "')";
             statement = conn.getConnection().createStatement();
             statement.executeUpdate(query);
-            Enumeration<AbstractButton> buttons = view.getSeceneklerGroupButton().getElements();
-            buttons.hasMoreElements();
-            AbstractButton button = buttons.nextElement();
-            if (button.getText().equals("Kredi Kart")) {
+            if (view.getSeceneklerGroupButton().getSelection().getActionCommand().equals("Kredi Kart")) {
                 query = "SELECT max(id) as id FROM Odeme";
                 sonuc = statement.executeQuery(query);
                 if (sonuc.next()) {
@@ -60,7 +59,7 @@ public class OdemeController {
                     modelOdeme = new Odeme(sonuc.getInt("id"), toplamUcret, date.toString());
                 }
             }
-
+            siparisKaydet();
         } catch (Exception e) {
             System.out.println("Operation Failed");
         }
@@ -81,10 +80,25 @@ public class OdemeController {
                     int uzunluk = view.getSiparisOzeti().getToplamUcret().getText().length();
                     float orjinalFiyat = Float.parseFloat(view.getSiparisOzeti().getToplamUcret().getText().substring(0, uzunluk - 2));
                     view.getSiparisOzeti().getToplamUcret().setText(orjinalFiyat - indirimMiktar + " tl");
-                }
-                else {
+                } else {
                     System.out.println("Bu indirm kod gecersiz");
                 }
+            }
+        } catch (Exception e) {
+            System.out.println("Operation Failed");
+        }
+    }
+
+    private void siparisKaydet() {
+        String query;
+        Statement statement;
+        try {
+            LocalDate date = LocalDate.now();
+            for (Urun urun : view.getUrunler()) {
+                query = "Insert INTO Siparis VALUES (DEFAULT,MUSTERI_ID," +
+                        urun.getId() + "," + urun.getSatici().getId() + "," + date + ")";
+                statement = conn.getConnection().createStatement();
+                statement.executeUpdate(query);
             }
         } catch (Exception e) {
             System.out.println("Operation Failed");

@@ -1,5 +1,7 @@
 package Model;
 
+import Controller.SepetController;
+
 import java.util.ArrayList;
 
 public class Sepet {
@@ -9,39 +11,46 @@ public class Sepet {
 
     static private Sepet sepet;
 
-    private Sepet(){}
+    private Sepet() {}
 
-    private Sepet(Musteri musteri, ArrayList<Urun> urunler) {
+    private Sepet(Musteri musteri) {
         this.musteri = musteri;
-        this.urunler = urunler;
+        this.urunler = UrunDB.urunlerGetir(SepetController.getUrulerId(musteri));
     }
 
-    static public Sepet getInstance(Musteri m){
-        if (sepet == null){
-            sepet = new Sepet(m, new ArrayList<>());
+    static public Sepet getInstance(Musteri m) {
+        if (sepet == null) {
+            sepet = new Sepet(m);
         }
         return sepet;
     }
 
-    static public Sepet getInstance(){
-        if (sepet == null){
+    static public Sepet getInstance() {
+        if (sepet == null) {
             sepet = new Sepet();
         }
         return sepet;
     }
 
-    public void urunEkle(Urun urun){
+    public void urunEkle(Urun urun) {
         urunler.add(urun);
         toplamUcretHsaaplama();
     }
 
-    private void toplamUcretHsaaplama(){
+    public void urunKaldir(Urun urun) {
+        urunler.remove(urun);
+        toplamUcretHsaaplama();
+    }
+
+    private void toplamUcretHsaaplama() {
         float toplamUcret = 0;
-        for (Urun urun : urunler){
+        for (Urun urun : urunler) {
             toplamUcret += urun.getFiyat();
         }
         this.toplamUcret = toplamUcret;
     }
+
+
 
     public Musteri getMusteri() {
         return musteri;

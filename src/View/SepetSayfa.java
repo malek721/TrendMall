@@ -1,23 +1,26 @@
 package View;
 
-import Model.Musteri;
-import Model.Sepet;
-import Model.Urun;
+import Controller.OdemeController;
+import Controller.SepetController;
+import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SepetSayfa{
+public class SepetSayfa implements ActionListener {
     Sepet sepet;
+
+    MainFrame main;
+
+    SiparisOzeti siparisOzeti;
 
     JLabel urunSayisi;
     JButton sepetOnayla;
 
     public SepetSayfa(Sepet sepet) {
         NavBar nav = new NavBar();
-        Musteri m = new Musteri(2, "Amr", "Walidi", "amr.nawaf128@gmail.com", "Amr_Nawaf128", "İstanbul/Türkiye", "5369922950");
         this.sepet = sepet;
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(null);
@@ -28,11 +31,20 @@ public class SepetSayfa{
         urunSayisi.setBounds(60, 50, 240, 25);
         urunSayisi.setForeground(new Color(0, 0, 0));
         mainPanel.add(urunSayisi);
-        SiparisOzeti siparisOzeti = new SiparisOzeti(sepet.getToplamUcret());
-        mainPanel.add(siparisOzeti.getOzet());
+        siparisOzeti = new SiparisOzeti(sepet.getToplamUcret());
+        mainPanel.add(siparisOzeti);
         for (int i = 0; i < sepet.getUrunler().size(); i++) {
             SepetUnsuru unsuru = new SepetUnsuru(sepet.getUrunler().get(i));
-            unsuru.setBounds(60, 100 + (i*100), 880, 80);
+            int tmp = i;
+            Urun urun = sepet.getUrunler().get(tmp);
+            unsuru.getRemove().addActionListener(e -> {
+                unsuru.setVisible(false);
+                SepetController.sepettenKaldir(urun);
+                siparisOzeti.getUrunUcret().setText(sepet.getToplamUcret() + " tl");
+                siparisOzeti.getToplamUcret().setText(sepet.getToplamUcret() + 45 + " tl");
+                urunSayisi.setText("Sepetim(" + sepet.getUrunler().size() + " ürün)");
+            });
+            unsuru.setBounds(60, 100 + (i * 100), 880, 80);
             mainPanel.add(unsuru);
         }
         sepetOnayla = new JButton("Sepet Onayla");
@@ -43,11 +55,20 @@ public class SepetSayfa{
         sepetOnayla.setForeground(new Color(0xD95927));
         sepetOnayla.setBackground(new Color(251, 251, 251));
         sepetOnayla.setBorder(BorderFactory.createLineBorder(new Color(0xD95927), 2));
+        sepetOnayla.addActionListener(this);
         mainPanel.add(sepetOnayla);
 
 
-        MainFrame main = new MainFrame();
+        main = new MainFrame();
         main.add(nav, BorderLayout.NORTH);
         main.add(mainPanel, BorderLayout.CENTER);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == sepetOnayla) {
+            new OdemeController(new Odeme(), new KartOdeme(), new OdemeSayfa(sepet.getUrunler()));
+            main.dispose();
+        }
     }
 }

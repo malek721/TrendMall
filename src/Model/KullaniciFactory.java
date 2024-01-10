@@ -6,9 +6,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class KullaniciFactory implements KullaniciFactoryI {
+
+    static DBConnection conn = DBConnection.getInstance();
     @Override
     public Kullanici getKullanici(String eposta) {
-        DBConnection conn = DBConnection.getInstance();
         Statement statement;
         String query;
         ResultSet sonuc;
@@ -28,13 +29,7 @@ public class KullaniciFactory implements KullaniciFactoryI {
             query = "SELECT * FROM Satici WHERE eposta = '" + eposta + "'";
             statement = conn.getConnection().createStatement();
             sonuc = statement.executeQuery(query);
-            int id = sonuc.getInt("id");
-            String ad = sonuc.getString("ad");
-            String soyad = sonuc.getString("soyad");
-            String sifre = sonuc.getString("sifre");
-            String adres = sonuc.getString("adres");
-            String telNo = sonuc.getString("tel_no");
-            //return new Satici(id, ad, soyad, eposta, sifre, adres, telNo);
+            return SaticiDB.saticiBilgileriGetir(conn, sonuc.getInt("id"));
         } catch (Exception e) {
             System.out.println(e);
         }

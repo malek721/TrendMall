@@ -8,7 +8,7 @@ public class Urun {
     private Kategori kategori;
     private int miktar;
 
-    public Urun (){
+    public Urun() {
 
     }
 

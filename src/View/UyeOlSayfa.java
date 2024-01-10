@@ -18,7 +18,6 @@ public class UyeOlSayfa implements ActionListener {
     String[] inputsName = {"Ad", "Soyad", "E-posta", "Şifre", "Telefon Numarası", "Adres"};
     ButtonGroup kullanicilarButtonGroup;
     String[] kullanicilarNames = {"Müşteri", "Satıcı"};
-    HashMap<String, JRadioButton> kullanicilar = new HashMap<>();
 
     JButton uyeOlButton;
     JLabel message;
@@ -103,12 +102,12 @@ public class UyeOlSayfa implements ActionListener {
         kullanicilarButtonGroup = new ButtonGroup();
         for (int i = 0; i < kullanicilarNames.length; i++) {
             JRadioButton kullanici = new JRadioButton(kullanicilarNames[i]);
+            kullanici.setActionCommand(kullanicilarNames[i]);
             kullanici.setBounds(50 + (i * 110), 390, 100, 30);
             kullanici.setFocusable(false);
             kullanici.setBackground(new Color(0xF7F7F7));
             kullanici.addActionListener(this);
             kullanicilarButtonGroup.add(kullanici);
-            kullanicilar.put(kullanicilarNames[i], kullanici);
             uyeOlForm.add(kullanici);
         }
         uyeOlForm.add(inputList);
@@ -142,10 +141,6 @@ public class UyeOlSayfa implements ActionListener {
             uyeOlFrame.dispose();
             new GirisController(new GirisSayfa(), new GirisYapma());
         }
-    }
-
-    public HashMap<String, JRadioButton> getKullanicilar() {
-        return kullanicilar;
     }
 
     public HashMap<String, JTextField> getInputs() {

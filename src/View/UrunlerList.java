@@ -12,12 +12,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class UrunlerList implements ActionListener {
-    NavBar nav;
-    JPanel urunList;
-    MainFrame main = new MainFrame();
-    ;
-    ArrayList<Urun> urunler;
-    JComboBox<String> kategori;
+    private MainFrame main;
+    private NavBar nav;
+    private JPanel urunList;
+    private ArrayList<Urun> urunler;
+    private JComboBox<String> kategori;
 
     public UrunlerList() {
         nav = new NavBar();
@@ -37,13 +36,10 @@ public class UrunlerList implements ActionListener {
         scroll.setBounds(58, 300, 1450, 300);
         mainContent.add(scroll);
         mainContent.add(kategori);
+        main = new MainFrame();
         main.add(nav, BorderLayout.NORTH);
         main.add(mainContent, BorderLayout.CENTER);
 
-    }
-
-    public MainFrame getMain() {
-        return main;
     }
 
     public JComboBox<String> getKategori() {
@@ -53,17 +49,18 @@ public class UrunlerList implements ActionListener {
     public void urunlerGoster(String kategori) {
         urunList.removeAll();
         urunler = UrunListController.urunEkle(kategori);
-        Musteri m = new Musteri(2, "Amr", "Walidi","amr.nawaf128@gmail.com","Amr_Nawaf128","İstanbul/Türkiye", "5369922950");
+        Musteri m = new Musteri(2, "Amr", "Walidi", "amr.nawaf128@gmail.com", "Amr_Nawaf128", "İstanbul/Türkiye", "5369922950");
         for (Urun urun : urunler) {
             Sepet sepet = Sepet.getInstance(m);
-            SepetController controller = new SepetController(sepet, new UrunDisplay(urun));
-            controller.getView().getSimdiAl().addActionListener(e -> main.dispose());
-            controller.getView().getSimdiAl().addActionListener(e ->
-                    new OdemeController(new Odeme(), new KartOdeme(),
-                            new OdemeSayfa(urun.getFiyat())
-                    )
-            );
-            urunList.add(controller.getView());
+            UrunDisplay urunDisplay = new UrunDisplay(urun);
+            new SepetController(sepet, urunDisplay);
+            urunDisplay.getSimdiAl().addActionListener(e -> {
+                ArrayList<Urun> urunList = new ArrayList<>();
+                urunList.add(urun);
+                new OdemeController(new Odeme(), new KartOdeme(), new OdemeSayfa(urunList));
+                main.dispose();
+            });
+            urunList.add(urunDisplay);
         }
         main.revalidate();
         main.repaint();
@@ -75,7 +72,7 @@ public class UrunlerList implements ActionListener {
             String selectedKategori = kategori.getSelectedItem().toString();
             urunlerGoster(selectedKategori);
         }
-        if(e.getSource() == nav.getSepet()) {
+        if (e.getSource() == nav.getSepet()) {
             new SepetSayfa(Sepet.getInstance());
             main.dispose();
         }

@@ -26,7 +26,7 @@ public class UyeOlController {
         String telNo = view.getInputs().get("Telefon Numarası").getText().trim();
         String adres = view.getInputs().get("Adres").getText().trim();
         String result;
-        if(view.getKullanicilarButtonGroup().getSelection().equals(view.getKullanicilar().get("Müşteri")))
+        if(view.getKullanicilarButtonGroup().getSelection().getActionCommand().equals("Müşteri"))
             result = model.addNewUser("Musteri" , ad, soyad, eposta, sifre, telNo, adres);
         else
             result = model.addNewUser("Satici", ad, soyad, eposta, sifre, telNo, adres);
