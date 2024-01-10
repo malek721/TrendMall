@@ -1,6 +1,10 @@
 package View;
 
+import Controller.UrunListController;
 import Controller.UyeOlController;
+import Model.Kullanici;
+import Model.KullaniciFactory;
+import Model.Musteri;
 import Model.UyeOl;
 
 import javax.swing.*;
@@ -121,7 +125,15 @@ public class GirisSayfa implements ActionListener {
             new UyeOlController(new UyeOlSayfa(), new UyeOl());
             girisFrame.dispose();
         }
-    }
+        if (e.getSource() == buttons.get("Giriş Yap")) {
+            KullaniciFactory factory  = new KullaniciFactory();
+            Kullanici kullanici  = factory.getKullanici(inputs.get("E-posta").getText());
+            if (kullanici instanceof Musteri)
+                new UrunListController(new UrunlerList((Musteri) kullanici));
+
+        }
+
+        }
 
     public JButton getGirisYapButton() {
         return girisYapButton;

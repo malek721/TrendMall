@@ -12,13 +12,17 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class UrunlerList implements ActionListener {
+    Musteri musteri;
+    Sepet sepet;
     private MainFrame main;
     private NavBar nav;
     private JPanel urunList;
     private ArrayList<Urun> urunler;
     private JComboBox<String> kategori;
 
-    public UrunlerList() {
+    public UrunlerList(Musteri musteri) {
+        this.musteri=musteri;
+        sepet = Sepet.getInstance(musteri);
         nav = new NavBar();
         nav.getSepet().addActionListener(this);
         JPanel mainContent = new JPanel();
@@ -49,9 +53,7 @@ public class UrunlerList implements ActionListener {
     public void urunlerGoster(String kategori) {
         urunList.removeAll();
         urunler = UrunListController.urunEkle(kategori);
-        Musteri m = new Musteri(2, "Amr", "Walidi", "amr.nawaf128@gmail.com", "Amr_Nawaf128", "İstanbul/Türkiye", "5369922950");
         for (Urun urun : urunler) {
-            Sepet sepet = Sepet.getInstance(m);
             UrunDisplay urunDisplay = new UrunDisplay(urun);
             new SepetController(sepet, urunDisplay);
             urunDisplay.getSimdiAl().addActionListener(e -> {

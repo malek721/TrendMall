@@ -50,7 +50,7 @@ public class BasariliSiparis implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == anasayfa){
-            new UrunListController(new UrunlerList());
+            //new UrunListController(new UrunlerList());
             mainFrame.dispose();
         }
     }
