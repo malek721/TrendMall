@@ -1,6 +1,7 @@
 package Model;
 
-import Controller.SepetController;
+import Model.DatabaseOperations.SepetDB;
+import Model.DatabaseOperations.UrunDB;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,8 @@ public class Sepet {
 
     private Sepet(Musteri musteri) {
         this.musteri = musteri;
-        this.urunler = UrunDB.urunlerGetir(SepetController.getUrulerId(musteri));
+        this.urunler = UrunDB.urunlerGetir(SepetDB.getUrulerId(musteri));
+        toplamUcretHsaaplama();
     }
 
     static public Sepet getInstance(Musteri m) {

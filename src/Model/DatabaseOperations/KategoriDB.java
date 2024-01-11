@@ -1,14 +1,16 @@
-package Model;
+package Model.DatabaseOperations;
 
 import Connection.DBConnection;
+import Model.Kategori;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 public class KategoriDB {
+    static DBConnection conn = DBConnection.getInstance();
 
-    static public String[] kategorileriGetir(DBConnection conn) {
+    static public String[] kategorileriGetir() {
         Statement statement;
         ResultSet sonuc;
         String query;
@@ -27,7 +29,7 @@ public class KategoriDB {
         return null;
     }
 
-    static public int kategriIdGetir(DBConnection conn, String kategriAd) {
+    static public int kategriIdGetir(String kategriAd) {
         Statement statement;
         ResultSet sonuc;
         String query;
@@ -44,7 +46,7 @@ public class KategoriDB {
         return 0;
     }
 
-    static public Kategori kategriGetir(DBConnection conn, int id) {
+    static public Kategori kategriGetir(int id) {
         Statement statement;
         ResultSet sonuc;
         String query;

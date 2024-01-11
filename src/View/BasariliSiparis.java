@@ -1,6 +1,7 @@
 package View;
+
 import Controller.UrunListController;
-import Model.UrunDB;
+import Model.Sepet;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -27,15 +28,15 @@ public class BasariliSiparis implements ActionListener {
         mesaj2.setBounds(335, 340, 859, 50);
         ImageIcon icon = new ImageIcon("img_1.png");
         JLabel imageContainer = new JLabel(icon);
-        imageContainer.setBounds(670, 50, 200,205);
+        imageContainer.setBounds(670, 50, 200, 205);
         anasayfa = new JButton("Ana Sayfa");
         anasayfa.setForeground(new Color(0xD95927));
         anasayfa.setBackground(new Color(0xFBFBFB));
         anasayfa.addActionListener(this);
         anasayfa.setBorder(BorderFactory.createEmptyBorder());
-        anasayfa.setBounds(690,450,160,55);
+        anasayfa.setBounds(690, 450, 160, 55);
         anasayfa.setBorder(new LineBorder(new Color(0xD95927), 3));
-        anasayfa.setFont(new Font("Inter", Font.BOLD,29));
+        anasayfa.setFont(new Font("Inter", Font.BOLD, 29));
         anasayfa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         anasayfa.setFocusable(false);
         mainPanel.add(mesaj1);
@@ -49,8 +50,8 @@ public class BasariliSiparis implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == anasayfa){
-            //new UrunListController(new UrunlerList());
+        if (e.getSource() == anasayfa) {
+            new UrunListController(new UrunlerList(), Sepet.getInstance());
             mainFrame.dispose();
         }
     }

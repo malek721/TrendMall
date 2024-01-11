@@ -1,15 +1,14 @@
 package View;
 
-import Controller.UrunListController;
 import Controller.UyeOlController;
-import Model.Kullanici;
-import Model.KullaniciFactory;
-import Model.Musteri;
 import Model.UyeOl;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.HashMap;
 
 public class GirisSayfa implements ActionListener {
@@ -118,22 +117,9 @@ public class GirisSayfa implements ActionListener {
         girisFrame.add(girisForm, BorderLayout.CENTER);
     }
 
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == buttons.get("Üye Ol")) {
-            new UyeOlController(new UyeOlSayfa(), new UyeOl());
-            girisFrame.dispose();
-        }
-        if (e.getSource() == buttons.get("Giriş Yap")) {
-            KullaniciFactory factory  = new KullaniciFactory();
-            Kullanici kullanici  = factory.getKullanici(inputs.get("E-posta").getText());
-            if (kullanici instanceof Musteri)
-                new UrunListController(new UrunlerList((Musteri) kullanici));
-
-        }
-
-        }
+    public MainFrame getGirisFrame() {
+        return girisFrame;
+    }
 
     public JButton getGirisYapButton() {
         return girisYapButton;
@@ -146,4 +132,14 @@ public class GirisSayfa implements ActionListener {
     public HashMap<String, JTextField> getInputs() {
         return inputs;
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == buttons.get("Üye Ol")) {
+            new UyeOlController(new UyeOlSayfa(), new UyeOl());
+            girisFrame.dispose();
+        }
+
+    }
+
 }

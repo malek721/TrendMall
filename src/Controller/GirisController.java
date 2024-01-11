@@ -1,7 +1,8 @@
 package Controller;
 
-import Model.GirisYapma;
+import Model.*;
 import View.GirisSayfa;
+import View.UrunlerList;
 
 import java.awt.*;
 
@@ -20,8 +21,11 @@ public class GirisController {
         String sifre = view.getInputs().get("Şifre").getText().trim();
         boolean status = model.loggingIn(eposta, sifre);
         if (status) {
-            view.getMessage().setText("Log in successful");
-            view.getMessage().setForeground(Color.GREEN);
+            KullaniciFactory factory  = new KullaniciFactory();
+            Kullanici kullanici  = factory.getKullanici(eposta);
+            if (kullanici instanceof Musteri)
+                new UrunListController(new UrunlerList(), Sepet.getInstance((Musteri) kullanici));
+            view.getGirisFrame().dispose();
         } else {
             view.getMessage().setText("There is no user with this email or password");
             view.getMessage().setForeground(Color.RED);

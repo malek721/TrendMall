@@ -1,14 +1,19 @@
 package Model;
 
+import Model.DatabaseOperations.MusteriDB;
+
 public class Odeme {
     private int id;
+
+    private Musteri musteri;
     private float odemTutar;
     private String odemTarihi;
 
     public Odeme() {
     }
-    public Odeme(int id, float odemeTutar, String odemeTarihi) {
+    public Odeme(int id,Musteri musteri, float odemeTutar, String odemeTarihi) {
         this.id = id;
+        this.musteri = musteri;
         this.odemTutar = odemeTutar;
         this.odemTarihi = odemeTarihi;
     }
@@ -19,6 +24,14 @@ public class Odeme {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Musteri getMusteri() {
+        return musteri;
+    }
+
+    public void setMusteri(Musteri musteri) {
+        this.musteri = musteri;
     }
 
     public float getOdemTutar() {

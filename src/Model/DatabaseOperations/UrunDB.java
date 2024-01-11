@@ -1,18 +1,21 @@
-package Model;
+package Model.DatabaseOperations;
 
 import Connection.DBConnection;
+import Model.Kategori;
+import Model.Satici;
+import Model.Urun;
 
 import java.sql.Array;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class UrunDB {
+    private static final DBConnection conn = DBConnection.getInstance();
 
     public UrunDB() {}
 
-    static public ResultSet urunBilgileriGetir(DBConnection conn) {
+    static public ResultSet urunBilgileriGetir() {
         Statement statement;
         ResultSet sonuc;
         String query;
@@ -27,12 +30,12 @@ public class UrunDB {
         return null;
     }
 
-    static public ResultSet urunBilgileriGetir(DBConnection conn, String kategori) {
+    static public ResultSet urunBilgileriGetir(String kategori) {
         Statement statement;
         ResultSet sonuc;
         String query;
         try {
-            query = "SELECT * FROM Urun WHERE katogori_id =" + KategoriDB.kategriIdGetir(conn, kategori) + " ";
+            query = "SELECT * FROM Urun WHERE katogori_id =" + KategoriDB.kategriIdGetir(kategori) + " ";
             statement = conn.getConnection().createStatement();
             sonuc = statement.executeQuery(query);
             return sonuc;
@@ -43,7 +46,6 @@ public class UrunDB {
     }
 
     static public ArrayList<Urun> urunlerGetir(Array urun_id){
-        DBConnection conn = DBConnection.getInstance();
         ArrayList<Urun> urunler = new ArrayList<>();
         String query;
         Statement statement;
@@ -57,8 +59,8 @@ public class UrunDB {
                 String ad = sonuc.getString("ad");
                 int miktar = sonuc.getInt("miktar");
                 float fiyat = sonuc.getFloat("fiyat");
-                Satici satici = SaticiDB.saticiBilgileriGetir(conn, sonuc.getInt("satici_id"));
-                Kategori kategori = KategoriDB.kategriGetir(conn, sonuc.getInt("katogori_id"));
+                Satici satici = SaticiDB.saticiGetir(sonuc.getInt("satici_id"));
+                Kategori kategori = KategoriDB.kategriGetir(sonuc.getInt("katogori_id"));
                 urunler.add(new Urun(id, satici, ad, fiyat, kategori, miktar));
             }
         } catch (Exception e) {

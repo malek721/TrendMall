@@ -1,13 +1,19 @@
-package Model;
+package Model.DatabaseOperations;
 
 import Connection.DBConnection;
+import Model.DatabaseOperations.KategoriDB;
+import Model.Kategori;
+import Model.Satici;
+import Model.Urun;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 public class SaticiDB {
-    static public Satici saticiBilgileriGetir(DBConnection conn, int id) {
+    private static final DBConnection conn = DBConnection.getInstance();
+
+    static public Satici saticiGetir(int id) {
         Satici satici = new Satici();
         satici.setId(id);
         Statement statement;
@@ -24,7 +30,7 @@ public class SaticiDB {
                 String sifre = sonuc.getString("sifre");
                 String adres = sonuc.getString("adres");
                 String telNo = sonuc.getString("tel_no");
-                ArrayList<Urun> urunler = saticiUrunleriGetir(conn, satici);
+                ArrayList<Urun> urunler = saticiUrunleriGetir(satici);
                 satici = new Satici(id, ad, soyad, eposta, sifre, adres, telNo, urunler);
             }
             return satici;
@@ -34,7 +40,7 @@ public class SaticiDB {
         return null;
     }
 
-    static private ArrayList<Urun> saticiUrunleriGetir(DBConnection conn, Satici satici) {
+    static private ArrayList<Urun> saticiUrunleriGetir(Satici satici) {
         ArrayList<Urun> urunler = new ArrayList<>();
         Statement statement;
         ResultSet sonuc;
@@ -48,7 +54,7 @@ public class SaticiDB {
                 String ad = sonuc.getString("ad");
                 int miktar = sonuc.getInt("miktar");
                 float fiyat = sonuc.getFloat("fiyat");
-                Kategori kategori = KategoriDB.kategriGetir(conn, sonuc.getInt("katogori_id"));
+                Kategori kategori = KategoriDB.kategriGetir(sonuc.getInt("katogori_id"));
                 Urun urun = new Urun(id, satici, ad, fiyat, kategori, miktar);
                 urunler.add(urun);
             }

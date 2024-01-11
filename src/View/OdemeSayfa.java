@@ -185,6 +185,14 @@ public class OdemeSayfa implements ActionListener {
         return odemeYap;
     }
 
+    public JButton getKodUygulama() {
+        return kodUygulama;
+    }
+
+    public JTextField getKod() {
+        return kod;
+    }
+
     public ButtonGroup getSeceneklerGroupButton() {
         return seceneklerGroupButton;
     }
@@ -197,15 +205,12 @@ public class OdemeSayfa implements ActionListener {
         return urunler;
     }
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == odemeYap) {
             new BasariliSiparis();
             main.dispose();
-        }
-
-        if(e.getSource() == kodUygulama){
-            OdemeController.indrimYap(kod.getText().trim());
         }
     }
 }
