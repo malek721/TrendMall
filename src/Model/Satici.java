@@ -30,7 +30,7 @@ public class Satici implements Kullanici {
 
     @Override
     public void telefonNoDegistir(String telNo) {
-        if (telNo.charAt(0) == '5' && telNo.length() == 10 || telNo.matches("\\d+")) {
+        if (telNo.charAt(0) == '5' && telNo.length() == 10 && telNo.matches("\\d+")) {
             SaticiDB.telNoDegistir(id, telNo);
             sb.setTelNo(telNo);
         }

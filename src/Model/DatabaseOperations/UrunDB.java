@@ -6,14 +6,15 @@ import Model.Satici;
 import Model.Urun;
 
 import java.sql.Array;
-import java.sql.Statement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class UrunDB {
     private static final DBConnection conn = DBConnection.getInstance();
 
-    public UrunDB() {}
+    public UrunDB() {
+    }
 
     static public ResultSet urunBilgileriGetir() {
         Statement statement;
@@ -45,7 +46,7 @@ public class UrunDB {
         return null;
     }
 
-    static public ArrayList<Urun> urunlerGetir(Array urun_id){
+    static public ArrayList<Urun> urunlerGetir(Array urun_id) {
         ArrayList<Urun> urunler = new ArrayList<>();
         String query;
         Statement statement;
@@ -67,5 +68,35 @@ public class UrunDB {
             System.out.println(e);
         }
         return urunler;
+    }
+
+    static public void urunEkle(int saticiId, String ad, int kategoriId, int miktar, float fiyat) {
+        Statement statement;
+        ResultSet sonuc;
+        String query;
+        try {
+            query = "INSERT INTO Urun VALUES " +
+                    "(DEFAULT, " + saticiId + "," + kategoriId + ",'" + ad + "'," + miktar + "," + fiyat + ")";
+            statement = conn.getConnection().createStatement();
+            statement.executeUpdate(query);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    static public ResultSet sonUrunGetir() {
+        Statement statement;
+        ResultSet sonuc;
+        String query;
+        try {
+            query = "SELECT * FROM urun WHERE id = (SELECT max(id) FROM urun)";
+            statement = conn.getConnection().createStatement();
+            sonuc = statement.executeQuery(query);
+            return sonuc;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
     }
 }

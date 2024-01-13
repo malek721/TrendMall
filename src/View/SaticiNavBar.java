@@ -1,6 +1,7 @@
 package View;
 
 import Controller.ProfileDuzeltmeController;
+import Controller.UrunEkleController;
 import Model.Satici;
 import Model.Sepet;
 
@@ -10,10 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SaticiNavBar extends JPanel implements ActionListener {
-    private Satici satici;
-    private JLabel kullaniciAdi;
-    private JButton urunEkle;
-    private JButton profil;
+    private final Satici satici;
+    private final JLabel kullaniciAdi;
+    private final JButton urunEkle;
+    private final JButton profil;
     public SaticiNavBar(Satici satici){
         this.satici = satici;
         this.setBackground(new Color(0xFAF8F8));
@@ -61,7 +62,7 @@ public class SaticiNavBar extends JPanel implements ActionListener {
             new ProfileDuzeltmeController(new ProfileDuzenleme(), satici);
         }
         if(e.getSource() == urunEkle){
-            new SepetSayfa(Sepet.getInstance());
+            new UrunEkleController(new UrunEklemeSayfa(), satici);
         }
     }
 }

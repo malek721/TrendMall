@@ -7,9 +7,9 @@ import java.awt.event.ActionListener;
 
 public class UrunEklemeSayfa{
 
-    JButton donBtn,kayidetBtn;
+    JButton kayidetBtn;
 
-    JTextField urnu_adi,katogori,miktar,fiyat;
+    JTextField urunAdi,katogori,miktar,fiyat;
 
     String[] bilgiler = {"ürün adı","katogori","miktar","fiyat"};
 
@@ -40,12 +40,12 @@ public class UrunEklemeSayfa{
             urunB.add(label);
         }
 
-        urnu_adi = new JTextField("  ");
-        urnu_adi.setFont(new Font("Poppins", Font.BOLD, 18));
-        urnu_adi.setBackground(new Color(0xE7E7E7));
-        urnu_adi.setBorder(BorderFactory.createLineBorder(new Color(0x919191), 1));
-        urnu_adi.setBounds(130, 85, 380, 50);
-        urunB.add(urnu_adi);
+        urunAdi = new JTextField("  ");
+        urunAdi.setFont(new Font("Poppins", Font.BOLD, 18));
+        urunAdi.setBackground(new Color(0xE7E7E7));
+        urunAdi.setBorder(BorderFactory.createLineBorder(new Color(0x919191), 1));
+        urunAdi.setBounds(130, 85, 380, 50);
+        urunB.add(urunAdi);
         katogori = new JTextField("  ");
         katogori.setFont(new Font("Poppins", Font.BOLD, 18));
         katogori.setBackground(new Color(0xE7E7E7));
@@ -77,5 +77,25 @@ public class UrunEklemeSayfa{
         MainFrame main = new MainFrame();
         main.add(nav, BorderLayout.NORTH);
         main.add(mainPanel, BorderLayout.CENTER);
+    }
+
+    public JButton getKayidetBtn() {
+        return kayidetBtn;
+    }
+
+    public JTextField getUrunAdi() {
+        return urunAdi;
+    }
+
+    public JTextField getKatogori() {
+        return katogori;
+    }
+
+    public JTextField getMiktar() {
+        return miktar;
+    }
+
+    public JTextField getFiyat() {
+        return fiyat;
     }
 }
