@@ -1,9 +1,9 @@
 package Controller;
 
-import Model.*;
 import Model.DatabaseOperations.KategoriDB;
 import Model.DatabaseOperations.SaticiDB;
 import Model.DatabaseOperations.UrunDB;
+import Model.*;
 import View.OdemeSayfa;
 import View.UrunDisplay;
 import View.UrunlerList;
@@ -22,6 +22,7 @@ public class UrunListController {
         addKategories();
         urunlerGoster();
         view.getKategori().addActionListener(e -> urunlerGoster());
+        view.getNav().getKullaniciAdi().setText(Musteri.getInstance().getMb().getAd() + " " + Musteri.getInstance().getMb().getSoyad());
     }
 
     private void addKategories() {
@@ -50,11 +51,11 @@ public class UrunListController {
         view.getMain().repaint();
     }
 
-     private ArrayList<Urun> urunlerGetir(String kategoriAd) {
+    private ArrayList<Urun> urunlerGetir(String kategoriAd) {
         ArrayList<Urun> urunler = new ArrayList<>();
         ResultSet sonuc;
         try {
-            if(kategoriAd.equals("Katogori Seç"))
+            if (kategoriAd.equals("Katogori Seç"))
                 sonuc = UrunDB.urunBilgileriGetir();
             else
                 sonuc = UrunDB.urunBilgileriGetir(kategoriAd);

@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SaticiUrunEkleme implements ActionListener {
+public class UrunEklemeSayfa{
 
     JButton donBtn,kayidetBtn;
 
@@ -14,7 +14,7 @@ public class SaticiUrunEkleme implements ActionListener {
     String[] bilgiler = {"ürün adı","katogori","miktar","fiyat"};
 
 
-    public SaticiUrunEkleme(){
+    public UrunEklemeSayfa(){
         NavBar nav = new NavBar();
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(null);
@@ -77,14 +77,5 @@ public class SaticiUrunEkleme implements ActionListener {
         MainFrame main = new MainFrame();
         main.add(nav, BorderLayout.NORTH);
         main.add(mainPanel, BorderLayout.CENTER);
-    }
-
-
-
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
     }
 }

@@ -2,18 +2,17 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class ProfileDuzenleme implements ActionListener {
-        JButton cikisBtn,donBtn,kayidetBtn;
-        JTextField ad,soyad,Tel_no,sifre;
-        TextArea adres;
-        String[] bilgiler = {"Ad","Soyad","Telefon No","Adres","Şifre"};
+public class ProfileDuzenleme {
+    NavBar nav;
+    JButton kayidetBtn;
+    JTextField ad, soyad, telNo, sifre;
+    TextArea adres;
+    String[] bilgiler = {"Ad", "Soyad", "Telefon No", "Adres", "Şifre"};
 
 
-    public ProfileDuzenleme(){
-        NavBar nav = new NavBar();
+    public ProfileDuzenleme() {
+        nav = new NavBar();
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(null);
         mainPanel.setBackground(new Color(251, 251, 251));
@@ -25,7 +24,7 @@ public class ProfileDuzenleme implements ActionListener {
         musteriB.setBounds(500, 50, 600, 540);
 
         for (int i = 0; i < bilgiler.length; i++) {
-            JLabel label = new JLabel(bilgiler[i]+":");
+            JLabel label = new JLabel(bilgiler[i] + ":");
             label.setFont(new Font("Arial", Font.PLAIN, 20));
             if (bilgiler[i].equals("Şifre"))
                 label.setBounds(20, 100 + (i * 80), 110, 25);
@@ -51,12 +50,12 @@ public class ProfileDuzenleme implements ActionListener {
         soyad.setEditable(false);
         musteriB.add(soyad);
 
-        Tel_no = new JTextField("  ");
-        Tel_no.setFont(new Font("Poppins", Font.BOLD, 16));
-        Tel_no.setBackground(new Color(0xE7E7E7));
-        Tel_no.setBorder(BorderFactory.createLineBorder(new Color(0x919191), 1));
-        Tel_no.setBounds(140, 190, 380, 50);
-        musteriB.add(Tel_no);
+        telNo = new JTextField("  ");
+        telNo.setFont(new Font("Poppins", Font.BOLD, 16));
+        telNo.setBackground(new Color(0xE7E7E7));
+        telNo.setBorder(BorderFactory.createLineBorder(new Color(0x919191), 1));
+        telNo.setBounds(140, 190, 380, 50);
+        musteriB.add(telNo);
 
         adres = new TextArea(" ");
         adres.setFont(new Font("Poppins", Font.BOLD, 16));
@@ -82,14 +81,33 @@ public class ProfileDuzenleme implements ActionListener {
         MainFrame main = new MainFrame();
         main.add(nav, BorderLayout.NORTH);
         main.add(mainPanel, BorderLayout.CENTER);
-        }
+    }
 
+    public JButton getKayidetBtn() {
+        return kayidetBtn;
+    }
 
+    public NavBar getNav() {
+        return nav;
+    }
 
+    public JTextField getAd() {
+        return ad;
+    }
 
+    public JTextField getSoyad() {
+        return soyad;
+    }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    public JTextField getTelNo() {
+        return telNo;
+    }
 
+    public JTextField getSifre() {
+        return sifre;
+    }
+
+    public TextArea getAdres() {
+        return adres;
     }
 }

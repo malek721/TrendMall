@@ -1,7 +1,7 @@
 package View;
 
 import Controller.ProfileDuzeltmeController;
-import Model.Musteri;
+import Model.Satici;
 import Model.Sepet;
 
 import javax.swing.*;
@@ -9,12 +9,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class NavBar extends JPanel implements ActionListener{
+public class SaticiNavBar extends JPanel implements ActionListener {
+    private Satici satici;
     private JLabel kullaniciAdi;
-    private JButton sepet;
+    private JButton urunEkle;
     private JButton profil;
-
-    public NavBar() {
+    public SaticiNavBar(Satici satici){
+        this.satici = satici;
         this.setBackground(new Color(0xFAF8F8));
         this.setPreferredSize(new Dimension(1512, 130));
         this.setBorder(BorderFactory.createLineBorder(new Color(0xCCCCCC), 1));
@@ -28,15 +29,15 @@ public class NavBar extends JPanel implements ActionListener{
         kullaniciAdi.setForeground(new Color(0x000000));
         kullaniciAdi.setBounds(900, 47, 200, 29);
         this.add(kullaniciAdi);
-        sepet = new JButton("Sepetim");
-        sepet.setFont(new Font("Inter", Font.PLAIN, 24));
-        sepet.setForeground(new Color(0xF4F4F4));
-        sepet.setBackground(new Color(0xFA6930));
-        sepet.setBounds(1184, 37, 125, 50);
-        sepet.setBorder(null);
-        sepet.setFocusable(false);
-        sepet.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        sepet.addActionListener(this);
+        urunEkle = new JButton("Ürün Ekle");
+        urunEkle.setFont(new Font("Inter", Font.PLAIN, 24));
+        urunEkle.setForeground(new Color(0xF4F4F4));
+        urunEkle.setBackground(new Color(0xFA6930));
+        urunEkle.setBounds(1184, 37, 125, 50);
+        urunEkle.setBorder(null);
+        urunEkle.setFocusable(false);
+        urunEkle.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        urunEkle.addActionListener(this);
         profil = new JButton("Profil Düzenleme");
         profil.setBounds(1333, 37, 154, 50);
         profil.setBackground(new Color(0xD3D3D3));
@@ -47,27 +48,19 @@ public class NavBar extends JPanel implements ActionListener{
         profil.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         profil.addActionListener(this);
         this.add(profil);
-        this.add(sepet);
+        this.add(urunEkle);
     }
 
     public JLabel getKullaniciAdi() {
         return kullaniciAdi;
     }
 
-    public JButton getSepet() {
-        return sepet;
-    }
-
-    public JButton getProfil() {
-        return profil;
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == profil){
-            new ProfileDuzeltmeController(new ProfileDuzenleme(), Musteri.getInstance());
+            new ProfileDuzeltmeController(new ProfileDuzenleme(), satici);
         }
-        if(e.getSource() == sepet){
+        if(e.getSource() == urunEkle){
             new SepetSayfa(Sepet.getInstance());
         }
     }

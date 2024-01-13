@@ -1,5 +1,8 @@
 package Model;
 
+import Model.DatabaseOperations.MusteriDB;
+import Model.DatabaseOperations.SaticiDB;
+
 import java.util.ArrayList;
 
 public class Satici implements Kullanici {
@@ -25,7 +28,25 @@ public class Satici implements Kullanici {
         return sb;
     }
 
-    public void setSb(SaticiBilgileri sb) {
-        this.sb = sb;
+    @Override
+    public void telefonNoDegistir(String telNo) {
+        if (telNo.charAt(0) == '5' && telNo.length() == 10 || telNo.matches("\\d+")) {
+            SaticiDB.telNoDegistir(id, telNo);
+            sb.setTelNo(telNo);
+        }
+    }
+
+    @Override
+    public void sifreDegistir(String yeniSifre) {
+        if (yeniSifre.length() > 6 && yeniSifre.length() < 16) {
+            SaticiDB.sifreDegistir(id, yeniSifre);
+            sb.setTelNo(yeniSifre);
+        }
+    }
+
+    @Override
+    public void adresDegister(String telNo) {
+        SaticiDB.adresDegistir(id, telNo);
+        sb.setTelNo(telNo);
     }
 }

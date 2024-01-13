@@ -40,7 +40,7 @@ public class SaticiDB {
         return null;
     }
 
-    static private ArrayList<Urun> saticiUrunleriGetir(Satici satici) {
+    static public ArrayList<Urun> saticiUrunleriGetir(Satici satici) {
         ArrayList<Urun> urunler = new ArrayList<>();
         Statement statement;
         ResultSet sonuc;
@@ -63,5 +63,41 @@ public class SaticiDB {
             System.out.println(e);
         }
         return null;
+    }
+
+    static public void adresDegistir(int id, String newAdres) {
+        Statement statement;
+        String query;
+        try {
+            query = "Update Satici set adres = '" + newAdres + "' WHERE id = " + id + " ";
+            statement = conn.getConnection().createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    static public void telNoDegistir(int id, String newTelNo) {
+        Statement statement;
+        String query;
+        try {
+            query = "Update Satici set tel_no = '" + newTelNo + "' WHERE id = " + id + " ";
+            statement = conn.getConnection().createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    static public void sifreDegistir(int id, String newSifre) {
+        Statement statement;
+        String query;
+        try {
+            query = "Update Satici set sifre = '" + newSifre + "' WHERE id = " + id + " ";
+            statement = conn.getConnection().createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

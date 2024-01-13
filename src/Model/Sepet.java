@@ -66,15 +66,7 @@ public class Sepet {
         return urunler;
     }
 
-    public void setUrunler(ArrayList<Urun> urunler) {
-        this.urunler = urunler;
-    }
-
     public float getToplamUcret() {
         return toplamUcret;
-    }
-
-    public void setToplamUcret(float toplamUcret) {
-        this.toplamUcret = toplamUcret;
     }
 }

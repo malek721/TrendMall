@@ -22,6 +22,10 @@ public class KullaniciFactory implements KullaniciFactoryI {
             if (sonuc.next()) {
                 return MusteriDB.musteriGetir(sonuc.getInt("id"));
             } else {
+                query = "SELECT * FROM Satici WHERE eposta = '" + eposta + "'";
+                statement = conn.getConnection().createStatement();
+                sonuc = statement.executeQuery(query);
+                sonuc.next();
                 return SaticiDB.saticiGetir(sonuc.getInt("id"));
             }
         } catch (Exception e) {

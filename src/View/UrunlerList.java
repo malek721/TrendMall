@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class UrunlerList implements ActionListener{
+public class UrunlerList{
     private MainFrame main;
     private NavBar nav;
     private JPanel urunList;
@@ -20,7 +20,6 @@ public class UrunlerList implements ActionListener{
     public UrunlerList() {
         main = new MainFrame();
         nav = new NavBar();
-        nav.getSepet().addActionListener(this);
         JPanel mainContent = new JPanel();
         mainContent.setLayout(null);
         mainContent.setBackground(new Color(251, 251, 251));
@@ -41,19 +40,16 @@ public class UrunlerList implements ActionListener{
     public MainFrame getMain() {
         return main;
     }
+
+    public NavBar getNav() {
+        return nav;
+    }
+
     public JPanel getUrunList() {
         return urunList;
     }
 
     public JComboBox<String> getKategori() {
         return kategori;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == nav.getSepet()){
-            new SepetSayfa(Sepet.getInstance());
-            main.dispose();
-        }
     }
 }

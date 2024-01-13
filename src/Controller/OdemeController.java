@@ -34,7 +34,7 @@ public class OdemeController {
         try {
             LocalDate date = LocalDate.now();
             float toplamUcret = Float.parseFloat(view.getSiparisOzeti().getToplamUcret().getText().substring(0, view.getSiparisOzeti().getToplamUcret().getText().length() - 2));
-            OdemeDB.odemeBilgileriKaydet(3, toplamUcret, date);
+            OdemeDB.odemeBilgileriKaydet(Musteri.getInstance().getId(), toplamUcret, date);
             if (view.getSeceneklerGroupButton().getSelection().getActionCommand().equals("Kredi Kart")) {
                 int id = OdemeDB.getSonOdemeID();
                 String kartSahibiAdi = view.getKartSahibiAdi().getText().trim();
