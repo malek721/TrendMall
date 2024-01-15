@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 
 public class SaticiNavBar extends JPanel implements ActionListener {
     private final Satici satici;
-    private final JLabel kullaniciAdi;
     private final JButton urunEkle;
     private final JButton profil;
 
@@ -25,7 +24,7 @@ public class SaticiNavBar extends JPanel implements ActionListener {
         JLabel logoContainer = new JLabel(logo);
         logoContainer.setBounds(58, 19, 130, 100);
         this.add(logoContainer);
-        kullaniciAdi = new JLabel(satici.getSb().getAd() + " " + satici.getSb().getSoyad());
+        JLabel kullaniciAdi = new JLabel(satici.getSb().getAd() + " " + satici.getSb().getSoyad());
         kullaniciAdi.setFont(new Font("Inter", Font.BOLD, 24));
         kullaniciAdi.setForeground(new Color(0x000000));
         kullaniciAdi.setBounds(900, 47, 200, 29);
@@ -50,10 +49,6 @@ public class SaticiNavBar extends JPanel implements ActionListener {
         profil.addActionListener(this);
         this.add(profil);
         this.add(urunEkle);
-    }
-
-    public JLabel getKullaniciAdi() {
-        return kullaniciAdi;
     }
 
     @Override

@@ -1,25 +1,17 @@
 package View;
 
-import Controller.OdemeController;
-import Controller.SepetController;
-import Controller.UrunListController;
-import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class UrunlerList{
-    private MainFrame main;
-    private NavBar nav;
-    private JPanel urunList;
-    private JComboBox<String> kategori;
+    private final MainFrame main;
+    private final JPanel urunList;
+    private final JComboBox<String> kategori;
 
     public UrunlerList() {
         main = new MainFrame();
-        nav = new NavBar();
+        NavBar nav = new NavBar();
         JPanel mainContent = new JPanel();
         mainContent.setLayout(null);
         mainContent.setBackground(new Color(251, 251, 251));
@@ -39,10 +31,6 @@ public class UrunlerList{
 
     public MainFrame getMain() {
         return main;
-    }
-
-    public NavBar getNav() {
-        return nav;
     }
 
     public JPanel getUrunList() {

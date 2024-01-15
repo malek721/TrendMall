@@ -1,6 +1,4 @@
 package View;
-
-import Controller.OdemeController;
 import Model.Urun;
 
 import javax.swing.*;
@@ -8,22 +6,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class OdemeSayfa implements ActionListener {
-    private ArrayList<Urun> urunler;
-    private MainFrame main;
-    private JTextField kartSahibiAdi;
-    private JTextField kartNo;
-    private JComboBox<Integer> sonAyTarihi;
-    private JComboBox<Integer> sonYilTarihi;
-    private JTextField cvv;
-    private ButtonGroup seceneklerGroupButton;
-    private JTextField kod;
-    private JButton kodUygulama;
-    private JButton odemeYap;
-
-    private SiparisOzeti siparisOzeti;
+    private final ArrayList<Urun> urunler;
+    private final MainFrame main;
+    private final JTextField kartSahibiAdi;
+    private final JTextField kartNo;
+    private final JComboBox<Integer> sonAyTarihi;
+    private final JComboBox<Integer> sonYilTarihi;
+    private final JTextField cvv;
+    private final ButtonGroup seceneklerGroupButton;
+    private final JTextField kod;
+    private final JButton kodUygulama;
+    private final JButton odemeYap;
+    private final SiparisOzeti siparisOzeti;
 
     public OdemeSayfa(ArrayList<Urun> urunler) {
         this.urunler = urunler;

@@ -6,8 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class UrunDuzeltmeSayfa {
-
-    SaticiNavBar nav;
     JButton kayidetBtn;
 
     JTextField urunAdi, katogori, miktar, fiyat;
@@ -16,7 +14,7 @@ public class UrunDuzeltmeSayfa {
 
 
     public UrunDuzeltmeSayfa(Satici satici) {
-        nav = new SaticiNavBar(satici);
+        SaticiNavBar nav = new SaticiNavBar(satici);
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(null);
         mainPanel.setBackground(new Color(251, 251, 251));

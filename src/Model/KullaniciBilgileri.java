@@ -21,12 +21,24 @@ public class KullaniciBilgileri {
         return ad;
     }
 
+    public void setAd(String ad) {
+        this.ad = ad;
+    }
+
     public String getSoyad() {
         return soyad;
     }
 
+    public void setSoyad(String soyad) {
+        this.soyad = soyad;
+    }
+
     public String getEposta() {
         return eposta;
+    }
+
+    public void setEposta(String eposta) {
+        this.eposta = eposta;
     }
 
     public String getSifre() {

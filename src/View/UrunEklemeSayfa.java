@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class UrunEklemeSayfa{
-
     JButton kayidetBtn;
 
     JTextField urunAdi,katogori,miktar,fiyat;

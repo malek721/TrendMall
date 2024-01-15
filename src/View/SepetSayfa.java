@@ -35,8 +35,7 @@ public class SepetSayfa implements ActionListener {
         mainPanel.add(siparisOzeti);
         for (int i = 0; i < sepet.getUrunler().size(); i++) {
             SepetUnsuru unsuru = new SepetUnsuru(sepet.getUrunler().get(i));
-            int tmp = i;
-            Urun urun = sepet.getUrunler().get(tmp);
+            Urun urun = sepet.getUrunler().get(i);
             unsuru.getRemove().addActionListener(e -> {
                 unsuru.setVisible(false);
                 SepetController.sepettenKaldir(urun);

@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.DatabaseOperations.UrunDB;
-import Model.Satici;
 import Model.Urun;
 import View.UrunDuzeltmeSayfa;
 

@@ -72,7 +72,6 @@ public class UrunDB {
 
     static public void urunEkle(int saticiId, String ad, int kategoriId, int miktar, float fiyat) {
         Statement statement;
-        ResultSet sonuc;
         String query;
         try {
             query = "INSERT INTO Urun VALUES " +

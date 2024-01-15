@@ -8,7 +8,7 @@ public class KartOdeme extends Odeme{
 
     public KartOdeme() {}
     public KartOdeme(int id, float odemTutar, String odemTarihi, String kartNo, String kartSahibiAdi, String sonKullanmaTarihi, int cvv) {
-        //super(id, Musteri.getInstance() ,odemTutar, odemTarihi);
+        super(id, Musteri.getInstance() ,odemTutar, odemTarihi);
         this.kartNo = kartNo;
         this.kartSahibiAdi = kartSahibiAdi;
         this.sonKullanmaTarihi = sonKullanmaTarihi;

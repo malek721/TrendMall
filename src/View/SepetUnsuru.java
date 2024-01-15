@@ -6,11 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SepetUnsuru extends JPanel {
-    Urun urun;
-    private JButton remove;
+    private final JButton remove;
 
     public SepetUnsuru(Urun urun) {
-        this.urun = urun;
         this.setBackground(new Color(0xFAFAFA));
         this.setBorder(BorderFactory.createLineBorder(new Color(0xC3C3C3), 1));
         this.setLayout(null);

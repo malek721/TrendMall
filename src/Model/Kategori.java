@@ -4,8 +4,6 @@ public class Kategori {
     int id;
     String ad;
 
-    public Kategori(){}
-
     public Kategori(int id, String ad) {
         this.id = id;
         this.ad = ad;

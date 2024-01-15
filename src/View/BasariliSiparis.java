@@ -10,8 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class BasariliSiparis implements ActionListener {
-    private JButton anasayfa;
-    private MainFrame mainFrame;
+    private final JButton anasayfa;
+    private final MainFrame mainFrame;
 
     public BasariliSiparis() {
         NavBar nav = new NavBar();

@@ -1,12 +1,9 @@
 package View;
 
 import Model.Satici;
-import Model.Sepet;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class SaticiSatanUrunlerList{
     private final MainFrame main;

@@ -40,14 +40,8 @@ public class ProfileDuzeltmeController {
         String telNo = view.getTelNo().getText();
         String sifre = view.getSifre().getText();
 
-        if (kullanici instanceof Musteri) {
-            kullanici.adresDegister(adres);
-            kullanici.telefonNoDegistir(telNo);
-            kullanici.sifreDegistir(sifre);
-        } else {
-            kullanici.adresDegister(adres);
-            kullanici.telefonNoDegistir(telNo);
-            kullanici.sifreDegistir(sifre);
-        }
+        kullanici.adresDegister(adres);
+        kullanici.telefonNoDegistir(telNo);
+        kullanici.sifreDegistir(sifre);
     }
 }

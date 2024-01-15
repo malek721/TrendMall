@@ -3,8 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SiparisOzeti extends JPanel {
-    private JLabel urunUcret;
-    private JLabel toplamUcret;
+    private final JLabel urunUcret;
+    private final JLabel toplamUcret;
     public SiparisOzeti(float urunFiyat){
         new JPanel(){
             @Override

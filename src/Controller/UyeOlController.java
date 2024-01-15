@@ -1,16 +1,12 @@
 package Controller;
 
-import Model.GirisYapma;
 import Model.UyeOl;
-import View.GirisSayfa;
 import View.UyeOlSayfa;
-
-import javax.swing.*;
 import java.awt.*;
 
 public class UyeOlController {
-    private UyeOlSayfa view;
-    private UyeOl model;
+    private final UyeOlSayfa view;
+    private final UyeOl model;
 
     public UyeOlController(UyeOlSayfa view, UyeOl model) {
         this.view = view;

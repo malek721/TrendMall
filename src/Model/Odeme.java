@@ -4,7 +4,6 @@ import Model.DatabaseOperations.MusteriDB;
 
 public class Odeme {
     private int id;
-
     private Musteri musteri;
     private float odemTutar;
     private String odemTarihi;

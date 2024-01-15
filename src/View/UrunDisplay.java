@@ -1,15 +1,9 @@
 package View;
 
-import Controller.OdemeController;
-import Model.KartOdeme;
-import Model.Odeme;
 import Model.Urun;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class UrunDisplay extends JPanel{
     private final Urun urun;

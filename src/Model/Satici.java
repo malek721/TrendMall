@@ -1,6 +1,5 @@
 package Model;
 
-import Model.DatabaseOperations.MusteriDB;
 import Model.DatabaseOperations.SaticiDB;
 
 import java.util.ArrayList;

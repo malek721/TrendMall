@@ -10,7 +10,7 @@ import View.UrunDuzeltmeSayfa;
 import java.util.ArrayList;
 
 public class SaticiUrunController {
-    private Satici satici;
+    private final Satici satici;
     private final SaticiSatanUrunlerList view;
 
     public SaticiUrunController(SaticiSatanUrunlerList view, Satici satici) {

@@ -10,9 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class NavBar extends JPanel implements ActionListener {
-    private JLabel kullaniciAdi;
-    private JButton sepet;
-    private JButton profil;
+    private final JLabel kullaniciAdi;
+    private final JButton sepet;
+    private final JButton profil;
 
     public NavBar() {
         this.setBackground(new Color(0xFAF8F8));
