@@ -3,7 +3,6 @@ package View;
 import Controller.ProfileDuzeltmeController;
 import Controller.UrunEkleController;
 import Model.Satici;
-import Model.Sepet;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +14,8 @@ public class SaticiNavBar extends JPanel implements ActionListener {
     private final JLabel kullaniciAdi;
     private final JButton urunEkle;
     private final JButton profil;
-    public SaticiNavBar(Satici satici){
+
+    public SaticiNavBar(Satici satici) {
         this.satici = satici;
         this.setBackground(new Color(0xFAF8F8));
         this.setPreferredSize(new Dimension(1512, 130));
@@ -25,7 +25,7 @@ public class SaticiNavBar extends JPanel implements ActionListener {
         JLabel logoContainer = new JLabel(logo);
         logoContainer.setBounds(58, 19, 130, 100);
         this.add(logoContainer);
-        kullaniciAdi = new JLabel();
+        kullaniciAdi = new JLabel(satici.getSb().getAd() + " " + satici.getSb().getSoyad());
         kullaniciAdi.setFont(new Font("Inter", Font.BOLD, 24));
         kullaniciAdi.setForeground(new Color(0x000000));
         kullaniciAdi.setBounds(900, 47, 200, 29);
@@ -58,11 +58,11 @@ public class SaticiNavBar extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == profil){
+        if (e.getSource() == profil) {
             new ProfileDuzeltmeController(new ProfileDuzenleme(), satici);
         }
-        if(e.getSource() == urunEkle){
-            new UrunEkleController(new UrunEklemeSayfa(), satici);
+        if (e.getSource() == urunEkle) {
+            new UrunEkleController(new UrunEklemeSayfa(satici), satici);
         }
     }
 }

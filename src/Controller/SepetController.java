@@ -8,15 +8,16 @@ import View.UrunDisplay;
 
 public class SepetController {
     static private Sepet model;
-    private UrunDisplay view;
+    private final UrunDisplay view;
 
     public SepetController(Sepet model, UrunDisplay view) {
         SepetController.model = model;
         this.view = view;
-        view.getSepeteEkleBtn().addActionListener(e -> sepeteEkle(view.getUrun()));
+        view.getSepeteEkleBtn().addActionListener(e -> sepeteEkle());
     }
 
-    private void sepeteEkle(Urun urun) {
+    private void sepeteEkle() {
+        Urun urun = view.getUrun();
         if (model.getUrunler().isEmpty()) {
             SepetDB.bosSepeteEkle(Musteri.getInstance().getId(), urun.getId(), urun.getFiyat());
             model.urunEkle(urun);

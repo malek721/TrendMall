@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class NavBar extends JPanel implements ActionListener{
+public class NavBar extends JPanel implements ActionListener {
     private JLabel kullaniciAdi;
     private JButton sepet;
     private JButton profil;
@@ -23,7 +23,7 @@ public class NavBar extends JPanel implements ActionListener{
         JLabel logoContainer = new JLabel(logo);
         logoContainer.setBounds(58, 19, 130, 100);
         this.add(logoContainer);
-        kullaniciAdi = new JLabel();
+        kullaniciAdi = new JLabel(Musteri.getInstance().getMb().getAd() + " " + Musteri.getInstance().getMb().getSoyad());
         kullaniciAdi.setFont(new Font("Inter", Font.BOLD, 24));
         kullaniciAdi.setForeground(new Color(0x000000));
         kullaniciAdi.setBounds(900, 47, 200, 29);
@@ -64,10 +64,10 @@ public class NavBar extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == profil){
+        if (e.getSource() == profil) {
             new ProfileDuzeltmeController(new ProfileDuzenleme(), Musteri.getInstance());
         }
-        if(e.getSource() == sepet){
+        if (e.getSource() == sepet) {
             new SepetSayfa(Sepet.getInstance());
         }
     }

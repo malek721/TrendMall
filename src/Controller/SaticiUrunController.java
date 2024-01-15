@@ -1,8 +1,11 @@
 package Controller;
 
-import Model.*;
 import Model.DatabaseOperations.SaticiDB;
-import View.*;
+import Model.Satici;
+import Model.Urun;
+import View.SaticiSatanUrunlerList;
+import View.SaticiUrunDisplay;
+import View.UrunDuzeltmeSayfa;
 
 import java.util.ArrayList;
 
@@ -14,7 +17,6 @@ public class SaticiUrunController {
         this.view = view;
         this.satici = satici;
         urunlerGoster();
-        view.getSaticiNavBar().getKullaniciAdi().setText(satici.getSb().getAd() + " " + satici.getSb().getSoyad());
     }
 
     private void urunlerGoster() {
@@ -22,7 +24,7 @@ public class SaticiUrunController {
         for (Urun urun : urunler) {
             SaticiUrunDisplay urunDisplay = new SaticiUrunDisplay(urun);
             urunDisplay.getUrunDuzeltleme().addActionListener(e -> {
-
+                new UrunDuzeltmeController(new UrunDuzeltmeSayfa(satici), urun);
                 view.getMain().dispose();
             });
             view.getUrunList().add(urunDisplay);

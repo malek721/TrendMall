@@ -99,4 +99,17 @@ public class UrunDB {
         }
         return null;
     }
+
+    static public void urunBilgileriKaydet(int urunId, int miktar, float fiyat) {
+        Statement statement;
+        String query;
+        try {
+            query = "Update urun set miktar = " + miktar + " Where id = " + urunId + ";\n"+
+                    "Update urun set fiyat = " + fiyat + " Where id = " + urunId + " ";
+            statement = conn.getConnection().createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println("Operation Failed");
+        }
+    }
 }

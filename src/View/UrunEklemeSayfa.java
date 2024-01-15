@@ -1,9 +1,9 @@
 package View;
 
+import Model.Satici;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class UrunEklemeSayfa{
 
@@ -14,8 +14,8 @@ public class UrunEklemeSayfa{
     String[] bilgiler = {"ürün adı","katogori","miktar","fiyat"};
 
 
-    public UrunEklemeSayfa(){
-        NavBar nav = new NavBar();
+    public UrunEklemeSayfa(Satici satici){
+        SaticiNavBar nav = new SaticiNavBar(satici);
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(null);
         mainPanel.setBackground(new Color(251, 251, 251));
@@ -78,6 +78,7 @@ public class UrunEklemeSayfa{
         main.add(nav, BorderLayout.NORTH);
         main.add(mainPanel, BorderLayout.CENTER);
     }
+
 
     public JButton getKayidetBtn() {
         return kayidetBtn;

@@ -9,14 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SaticiSatanUrunlerList{
-    private Satici satici;
-    private MainFrame main;
-    private SaticiNavBar nav;
-    private JPanel urunList;
+    private final MainFrame main;
+    private final JPanel urunList;
     public SaticiSatanUrunlerList(Satici satici){
-        this.satici = satici;
         main = new MainFrame();
-        nav = new SaticiNavBar(satici);
+        SaticiNavBar nav = new SaticiNavBar(satici);
         JPanel mainContent = new JPanel();
         mainContent.setLayout(null);
         mainContent.setBackground(new Color(251, 251, 251));
@@ -30,10 +27,6 @@ public class SaticiSatanUrunlerList{
 
     public MainFrame getMain() {
         return main;
-    }
-
-    public SaticiNavBar getSaticiNavBar() {
-        return nav;
     }
 
     public JPanel getUrunList() {

@@ -22,7 +22,6 @@ public class UrunListController {
         addKategories();
         urunlerGoster();
         view.getKategori().addActionListener(e -> urunlerGoster());
-        view.getNav().getKullaniciAdi().setText(Musteri.getInstance().getMb().getAd() + " " + Musteri.getInstance().getMb().getSoyad());
     }
 
     private void addKategories() {

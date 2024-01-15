@@ -8,7 +8,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class SepetDB {
-    private static final  DBConnection conn = DBConnection.getInstance();
+    private static final DBConnection conn = DBConnection.getInstance();
+
     static public void bosSepeteEkle(int musteriId, int urunId, float urunFiyat) {
         Statement statement;
         String query;
@@ -31,11 +32,11 @@ public class SepetDB {
         String query;
         try {
             query = "Update Sepet set urun_id = array_append(urun_id, " + urunId + ") " +
-                    "Where musteri_id = " + musteriId + ";\n";
-            String query2 = "Update Sepet set toplam_ucret = toplam_ucret +" + urunFiyat +
+                    "Where musteri_id = " + musteriId + ";\n" +
+                    "Update Sepet set toplam_ucret = toplam_ucret +" + urunFiyat +
                     " Where musteri_id = " + musteriId + " ";
             statement = conn.getConnection().createStatement();
-            statement.executeUpdate(query + query2);
+            statement.executeUpdate(query);
         } catch (Exception e) {
             System.out.println("Operation Failed");
         }
@@ -46,16 +47,15 @@ public class SepetDB {
         String query;
         try {
             query = "Update Sepet set urun_id = array_remove(urun_id, " + urunId + ") " +
-                    "Where musteri_id = " + musteriId + ";\n";
-            String query2 = "Update Sepet set toplam_ucret = toplam_ucret -" + urunFiyat +
-                    " Where musteri_id = " + musteriId + " ";
+                    "Where musteri_id = " + musteriId + ";\n" +
+                    "Update Sepet set toplam_ucret = toplam_ucret -" + urunFiyat +
+                    "  Where musteri_id = \" + musteriId + \" ";
             statement = conn.getConnection().createStatement();
-            statement.executeUpdate(query + query2);
+            statement.executeUpdate(query);
         } catch (Exception e) {
             System.out.println("Operation Failed");
         }
     }
-
 
 
     static public Array getUrulerId(Musteri m) {
@@ -67,7 +67,7 @@ public class SepetDB {
             statement = conn.getConnection().createStatement();
             sonuc = statement.executeQuery(query);
             sonuc.next();
-                return sonuc.getArray("urun_id");
+            return sonuc.getArray("urun_id");
         } catch (Exception e) {
             System.out.println("Operation Failed");
         }
