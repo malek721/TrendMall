@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DBConnection {
+    private static Connection conn = null;
     private final static String database = "TrendMallDB";
     private final static String username = "postgres";
-    private final static String password = "AmrF.C.B";
-    private static Connection conn = null;
+    private final static String password = "malek2002";
     private static DBConnection dbconn;
 
     private DBConnection() {

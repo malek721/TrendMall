@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+import Model.DatabaseOperations.GirisYapma;
 import View.GirisSayfa;
 import View.SaticiSatanUrunlerList;
 import View.UrunlerList;

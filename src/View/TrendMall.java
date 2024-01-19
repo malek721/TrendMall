@@ -1,7 +1,7 @@
 package View;
 
 import Controller.GirisController;
-import Model.GirisYapma;
+import Model.DatabaseOperations.GirisYapma;
 
 import javax.swing.*;
 import java.awt.*;

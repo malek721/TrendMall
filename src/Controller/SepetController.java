@@ -21,9 +21,18 @@ public class SepetController {
         if (model.getUrunler().isEmpty()) {
             SepetDB.bosSepeteEkle(Musteri.getInstance().getId(), urun.getId(), urun.getFiyat());
             model.urunEkle(urun);
-        } else if (!model.getUrunler().contains(urun)) {
-            SepetDB.sepeteEkle(Musteri.getInstance().getId(), urun.getId(), urun.getFiyat());
-            model.urunEkle(urun);
+        } else {
+            boolean isContains = false;
+            for (Urun u : model.getUrunler()) {
+                if (u.getId() == urun.getId()) {
+                    isContains = true;
+                    break;
+                }
+            }
+            if (!isContains) {
+                SepetDB.sepeteEkle(Musteri.getInstance().getId(), urun.getId(), urun.getFiyat());
+                model.urunEkle(urun);
+            }
         }
     }
 
